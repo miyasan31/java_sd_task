@@ -96,8 +96,8 @@ public class employee_insert extends HttpServlet {
 								sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>従業員登録完了</div>");
 							}
 							sb.append("<div class='flex justify-center pt-5'>");
-								sb.append("<a href='/SD/src/pages/insert.html' class='btn btn-link'>登録に戻る</a>");
-								sb.append("<a href='/SD/src/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
+								sb.append("<a href='/SD/pages/insert.html' class='btn btn-link'>登録に戻る</a>");
+								sb.append("<a href='/SD/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
 						sb.append("</div>");
 					sb.append("</div>");
