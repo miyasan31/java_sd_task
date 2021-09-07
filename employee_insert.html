@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <main
+      class="
+        flex
+        justify-center
+        items-center
+        flex-col
+        gap-4
+        h-screen
+        w-full
+        bg-gray-200
+      "
+    >
+      <form action="./servlet/sd_employee_insert" method="POST">
+        <div class="flex justify-center items-start flex-col gap-4">
+          <h1>従業員登録</h1>
+
+          <div>
+            <label for="employee_name">従業員氏名</label>
+            <input
+              type="text"
+              id="employee_name"
+              name="EMPLOYEE_NAME"
+              value=""
+              placeholder="従業員氏名"
+            />
+          </div>
+
+          <div>
+            <label for="employee_name_sub">従業員氏名（カナ）</label>
+            <input
+              type="text"
+              id="employee_name_sub"
+              name="EMPLOYEE_NAME_SUB"
+              value=""
+              placeholder="従業員氏名（カナ）"
+            />
+          </div>
+
+          <div>
+            <label for="birthday_year">生年月日</label>
+            <input
+              type="number"
+              id="birthday_year"
+              name="BIRTHDAY_YEAR"
+              value=""
+              placeholder="（年）"
+            />
+          </div>
+
+          <div>
+            <label for="birthday_month">生年月日</label>
+            <input
+              type="number"
+              id="birthday_month"
+              name="BIRTHDAY_MONTH"
+              value=""
+              placeholder="（月）"
+            />
+          </div>
+
+          <div>
+            <label for="birthday_day">生年月日</label>
+            <input
+              type="number"
+              id="birthday_day"
+              name="BIRTHDAY_DAY"
+              value=""
+              placeholder="（日）"
+            />
+          </div>
+
+          <div>
+            <label for="employee_gender">性別</label>
+            <select name="EMPLOYEE_GENDER" id="employee_gender">
+              <option disabled>性別を選択してください</option>
+              <option value="1">男</option>
+              <option value="2">女</option>
+              <option value="3">その他</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="company_join_yaer">入社年月日</label>
+            <input
+              type="number"
+              id="company_join_yaer"
+              name="COMPANY_JOIN_YEAR"
+              value=""
+              placeholder="（年）"
+            />
+          </div>
+
+          <div>
+            <label for="company_join_month">入社年月日</label>
+            <input
+              type="number"
+              id="company_join_month"
+              name="COMPANY_JOIN_MONTH"
+              value=""
+              placeholder="（月）"
+            />
+          </div>
+
+          <div>
+            <label for="company_join_day">入社年月日</label>
+            <input
+              type="number"
+              id="company_join_day"
+              name="COMPANY_JOIN_DAY"
+              value=""
+              placeholder="（日）"
+            />
+          </div>
+
+          <div>
+            <label for="employee_phone1">電話番号1</label>
+            <input
+              type="text"
+              id="employee_phone1"
+              name="EMPLOYEE_PHONE_1"
+              value=""
+            />
+          </div>
+
+          <div>
+            <label for="employee_phone2">電話番号2</label>
+            <input
+              type="text"
+              id="employee_phone2"
+              name="EMPLOYEE_PHONE_2"
+              value=""
+            />
+          </div>
+
+          <div>
+            <label for="employee_phone3">電話番号3</label>
+            <input
+              type="text"
+              id="employee_phone3"
+              name="EMPLOYEE_PHONE_3"
+              value=""
+            />
+          </div>
+
+          <div>
+            <label for="employee_zipcode">郵便番号</label>
+            <input
+              type="number"
+              id="employee_zipcode"
+              name="EMPLOYEE_ZIPCODE"
+              value=""
+              placeholder="郵便番号"
+            />
+          </div>
+
+          <div>
+            <label for="employee_address">住所</label>
+            <input
+              type="text"
+              id="employee_address"
+              name="EMPLOYEE_ADDRESS"
+              value=""
+              placeholder="住所"
+            />
+          </div>
+
+          <div>
+            <label for="employee_type">従業員タイプ</label>
+            <select name="EMPLOYEE_TYPE" id="employee_type">
+              <option disabled>従業員タイプを選択してください</option>
+              <option value="1">店長</option>
+              <option value="2">正社員</option>
+              <option value="3">アルバイト</option>
+            </select>
+          </div>
+
+          <button class="bg-blue-500 text-white py-2 px-5 rounded-full">
+            送信
+          </button>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
