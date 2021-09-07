@@ -33,17 +33,22 @@
 
  		SQL = new StringBuffer();
 
- 		SQL.append("SELECT employee_id, employee_name FROM employee");
+ 		SQL.append("SELECT working_shift_id, employee_name ");
+ 		SQL.append("FROM working_shift, employee ");
+ 		SQL.append("WHERE working_shift.employee_id = employee.employee_id ");
+ 		SQL.append("AND working_shift_leaving IS NULL ");
+ 		System.out.println(SQL.toString());
 
  		rs = stmt.executeQuery(SQL.toString());
 
  		while (rs.next()){
  						 map = new HashMap<String,String>();
-							map.put("employee_id",rs.getString("employee_id"));
+							map.put("working_shift_id",rs.getString("working_shift_id"));
 							map.put("employee_name",rs.getString("employee_name"));
  						 list.add(map);
  				}
  		}
+
 
  		catch(ClassNotFoundException e){
  					ERMSG = new StringBuffer();
@@ -78,7 +83,6 @@
  		 		}
  		 	}
  %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
@@ -86,11 +90,11 @@
 	<title>出勤登録</title>
  </head>
  <body>
-	<form action="./servlet/shift_join" method="POST">
-		<select name="EMPLOYEE_ID">
+	<form action="/SD/servlet/shift_leaving" method="POST">
+		<select name="WORKING_SHIFT_ID">
 				<option selected disabled>選択してください</option>
 				<% for (int i = 0; i < list.size(); i++) { %>
-						<option value="<%= list.get(i).get("employee_id") %>">
+						<option value="<%= list.get(i).get("working_shift_id") %>">
 							<%= list.get(i).get("employee_name") %>
 						</option>
 				<% } %>
