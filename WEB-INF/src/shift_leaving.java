@@ -50,7 +50,6 @@ public class shift_leaving extends HttpServlet {
 					sb.append("<div class='h-screen w-full'>");
 						sb.append("<div class='text-2xl text-center bg-primary py-5 font-bold text-white'>退勤登録</div>");
 						sb.append("<div class='px-5'>");
-
 							query = new StringBuffer();
 							query.append("UPDATE working_shift SET working_shift_leaving = '");
 							query.append(leaving_date_time);
@@ -58,13 +57,9 @@ public class shift_leaving extends HttpServlet {
 							query.append(working_shift_id);
 							query.append("'");
 							stmt.executeUpdate(query.toString());
-
 							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>退勤登録完了</div>");
-							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>退勤登録完了</div>");
-							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>退勤登録完了</div>");
-
 							sb.append("<div class='flex justify-center pt-5'>");
-								sb.append("<a href='/SD/index.html' class='btn btn-link'>ホームに戻る</a>");
+								sb.append("<a href='/SD/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
 						sb.append("</div>");
 					sb.append("</div>");
