@@ -29,15 +29,15 @@ public class employee_insert extends HttpServlet {
 		String birthday_month = req.getParameter("BIRTHDAY_MONTH");
 		String birthday_day = req.getParameter("BIRTHDAY_DAY");
 		String employee_gender = req.getParameter("EMPLOYEE_GENDER");
+		String employee_zipcode = req.getParameter("EMPLOYEE_ZIPCODE");
+		String employee_address = req.getParameter("EMPLOYEE_ADDRESS");
+		String employee_phone = req.getParameter("EMPLOYEE_PHONE");
+		String employee_email = req.getParameter("EMPLOYEE_EMAIL");
+		String employee_password = req.getParameter("EMPLOYEE_PASSWORD");
+		String employee_type = req.getParameter("EMPLOYEE_TYPE");
 		String company_join_year = req.getParameter("COMPANY_JOIN_YEAR");
 		String company_join_month = req.getParameter("COMPANY_JOIN_MONTH");
 		String company_join_day = req.getParameter("COMPANY_JOIN_DAY");
-		String employee_phone1 = req.getParameter("EMPLOYEE_PHONE_1");
-		String employee_phone2 = req.getParameter("EMPLOYEE_PHONE_2");
-		String employee_phone3 = req.getParameter("EMPLOYEE_PHONE_3");
-		String employee_zipcode = req.getParameter("EMPLOYEE_ZIPCODE");
-		String employee_address = req.getParameter("EMPLOYEE_ADDRESS");
-		String employee_type = req.getParameter("EMPLOYEE_TYPE");
 
 		try {
 			Class.forName(DRIVER);
@@ -45,8 +45,8 @@ public class employee_insert extends HttpServlet {
 			stmt = con.createStatement();
 
 			StringBuffer query = new StringBuffer();
-			query.append("select * from employee where employee_phone1 ='");
-			query.append(employee_phone1);
+			query.append("select * from employee where employee_email ='");
+			query.append(employee_email);
 			query.append("'");
 			ResultSet rs = stmt.executeQuery(query.toString());
 
@@ -63,12 +63,12 @@ public class employee_insert extends HttpServlet {
 						sb.append("<div class='px-5'>");
 							if (rs.next()) {
 								sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>従業員登録</div>");
-								sb.append("<div class='text-center'>" + employee_name + "はすでに登録されています</div>");
+								sb.append("<div class='text-center'>" + employee_email + "はすでに登録されています</div>");
 							} else {
 								query = new StringBuffer();
 								query.append("INSERT INTO employee");
-								query.append("(employee_name, employee_name_sub, employee_birthday, employee_gender, company_join, ");
-								query.append("employee_phone1, employee_phone2, employee_phone3, employee_zipcode, employee_address,employee_type)");
+								query.append("(employee_name, employee_name_sub, employee_birthday, employee_gender, employee_zipcode, employee_address, ");
+								query.append("employee_phone, employee_email, employee_password, employee_type, company_join) ");
 								query.append("values('");
 								query.append(employee_name);
 								query.append("','");
@@ -78,26 +78,26 @@ public class employee_insert extends HttpServlet {
 								query.append("','");
 								query.append(employee_gender);
 								query.append("','");
-								query.append(company_join_year + "-" + company_join_month + "-" + company_join_day);
-								query.append("','");
-								query.append(employee_phone1);
-								query.append("','");
-								query.append(employee_phone2);
-								query.append("','");
-								query.append(employee_phone3);
-								query.append("','");
 								query.append(employee_zipcode);
 								query.append("','");
 								query.append(employee_address);
 								query.append("','");
+								query.append(employee_phone);
+								query.append("','");
+								query.append(employee_email);
+								query.append("','");
+								query.append(employee_password);
+								query.append("','");
 								query.append(employee_type);
+								query.append("','");
+								query.append(company_join_year + "-" + company_join_month + "-" + company_join_day);
 								query.append("')");
 								stmt.executeUpdate(query.toString());
 								sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>従業員登録完了</div>");
 							}
 							sb.append("<div class='flex justify-center pt-5'>");
-								sb.append("<a href='/SD/pages/insert.html' class='btn btn-link'>登録に戻る</a>");
-								sb.append("<a href='/SD/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
+								sb.append("<a href='/SD/pages/employee_insert.html' class='btn btn-link'>登録に戻る</a>");
+								sb.append("<a href='/SD/pages/index.jsp' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
 						sb.append("</div>");
 					sb.append("</div>");

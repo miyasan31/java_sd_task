@@ -30,6 +30,7 @@ public class shift_leaving extends HttpServlet {
 		StringBuffer query = new StringBuffer();
 
 		String working_shift_id = req.getParameter("WORKING_SHIFT_ID");
+		System.out.print(working_shift_id);
 		
 		SimpleDateFormat date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String leaving_date_time = date_time.format(new Date());
