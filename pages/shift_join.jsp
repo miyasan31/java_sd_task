@@ -83,19 +83,104 @@
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link
+		href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1/dist/tailwind.min.css"
+		rel="stylesheet"
+		type="text/css"
+	/>
+	<link
+		href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css"
+		rel="stylesheet"
+		type="text/css"
+	/>
 	<title>出勤登録</title>
  </head>
  <body>
 	<form action="/SD/servlet/shift_join" method="POST">
-		<select name="EMPLOYEE_ID">
-				<option selected disabled>選択してください</option>
-				<% for (int i = 0; i < list.size(); i++) { %>
-						<option value="<%= list.get(i).get("employee_id") %>">
-							<%= list.get(i).get("employee_name") %>
-						</option>
-				<% } %>
-		</select>
-		<button>送信</button>
+    <div class="flex flex-col w-full h-screen">
+      <header class="w-full bg-blue-400 py-4 border-b border-gray-200">
+        <h1 class="text-center text-4xl font-bold text-white">
+          カラオケシステム
+        </h1>
+      </header>
+      <div class="flex flex-1 w-full bg-gray-100">
+        <nav class="w-1/5 border-r border-gray-200">
+          <div class="flex flex-col gap-2 p-4">
+            <a
+              href="/SD/pages/index.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              ホーム
+            </a>
+            <a
+              href="/SD/pages/shift_join.jsp"
+              class="py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full"
+            >
+              出勤登録
+            </a>
+            <a
+              href="/SD/pages/shift_leaving.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              退勤登録
+            </a>
+            <a
+              href="/SD/pages/employee_insert.html"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              従業員登録
+            </a>
+            <a
+              href="/SD/pages/signin.html"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              ログアウト
+            </a>
+          </div>
+        </nav>
+
+        <main class="w-4/5 flex flex-col justify-center items-center">
+					<div class="flex flex-col gap-4 w-96">
+						<h1
+							class="
+								text-center
+								sm:text-3xl
+								text-2xl
+								font-medium
+								title-font
+								text-gray-800
+							"
+						>
+							出勤登録
+						</h1>
+
+						<select name="EMPLOYEE_ID" class="select select-bordered select-info w-full">
+								<option selected disabled>選択してください</option>
+								<% for (int i = 0; i < list.size(); i++) { %>
+										<option value="<%= list.get(i).get("employee_id") %>">
+											<%= list.get(i).get("employee_name") %>
+										</option>
+								<% } %>
+						</select>
+
+						<button class="
+								w-full
+								mx-auto
+								text-white
+								bg-blue-500
+								border-0
+								py-2
+								px-8
+								mt-2
+								focus:outline-none
+								hover:bg-blue-600
+								text-lg
+								rounded-full"
+							>送信</button>
+					</div>
+        </main>
+      </div>
+    </div>
 	</form>
  </body>
 </html>
