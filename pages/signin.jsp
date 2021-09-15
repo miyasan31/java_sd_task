@@ -34,49 +34,38 @@
           h-screen
           bg-gray-100
         "
-      >
-        <h1
-          class="
-            text-center
-            sm:text-3xl
-            text-2xl
-            font-medium
-            title-font
-            text-gray-800
-            mb-4
-          "
         >
-          サインイン
-        </h1>
 
-
-        <div class="flex flex-col w-96 mx-auto gap-4">
-
-          <div class="text-left text-red-400">メールアドレスまたはパスワードが間違っています</div>
+        <div class="flex flex-col w-96 mx-auto gap-2">
+          <h1
+            class="text-center text-2xl md:text-3xl font-medium text-gray-800"
+          >
+            サインイン
+          </h1>
           
-          <div>
-            <label for="email" class="leading-8 pl-2 text-gray-600">
-              メールアドレス
-            </label>
-            <input
-              type="text"
-              id="email"
-              name="EMPLOYEE_EMAIL"
-              class="input input-info input-bordered w-full"
-            />
-          </div>
+          <label class="pl-2 text-lg text-gray-600 text-red-400">
+            メールアドレスまたはパスワードが間違っています
+          </label>
 
-          <div>
-            <label for="password" class="leading-8 pl-2 text-gray-600">
-              パスワード
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="EMPLOYEE_PASSWORD"
-              class="input input-info input-bordered w-full"
-            />
-          </div>
+          <label for="email" class="pl-2 text-gray-600">
+            メールアドレス
+          </label>
+          <input
+            type="text"
+            id="email"
+            name="EMPLOYEE_EMAIL"
+            class="input input-info input-bordered w-full"
+          />
+
+          <label for="password" class="pl-2 text-gray-600">
+            パスワード
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="EMPLOYEE_PASSWORD"
+            class="input input-info input-bordered w-full"
+          />
 
           <button
             class="
@@ -85,9 +74,9 @@
               text-white
               bg-blue-500
               border-0
-              py-2
+              py-3
               px-8
-              mt-2
+              mt-4
               focus:outline-none
               hover:bg-blue-600
               text-lg

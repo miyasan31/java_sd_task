@@ -286,9 +286,9 @@
 								text-white
 								bg-blue-500
 								border-0
-								py-2
+								py-3
 								px-8
-								mt-2
+								mt-4
 								focus:outline-none
 								hover:bg-blue-600
 								text-lg

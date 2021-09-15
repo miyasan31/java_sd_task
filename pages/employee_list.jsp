@@ -102,7 +102,7 @@
       rel="stylesheet"
       type="text/css"
     />
-    <title>シフト一覧</title>
+    <title>従業員一覧</title>
   </head>
   <body>
     <div class="flex flex-col w-full h-screen">

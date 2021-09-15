@@ -159,7 +159,7 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("      rel=\"stylesheet\"\r\n");
       out.write("      type=\"text/css\"\r\n");
       out.write("    />\r\n");
-      out.write("    <title>シフト一覧</title>\r\n");
+      out.write("    <title>従業員一覧</title>\r\n");
       out.write("  </head>\r\n");
       out.write("  <body>\r\n");
       out.write("    <div class=\"flex flex-col w-full h-screen\">\r\n");

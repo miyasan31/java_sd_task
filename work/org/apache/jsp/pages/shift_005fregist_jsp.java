@@ -351,9 +351,9 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\t\t\t\t\t\t\t\ttext-white\r\n");
       out.write("\t\t\t\t\t\t\t\tbg-blue-500\r\n");
       out.write("\t\t\t\t\t\t\t\tborder-0\r\n");
-      out.write("\t\t\t\t\t\t\t\tpy-2\r\n");
+      out.write("\t\t\t\t\t\t\t\tpy-3\r\n");
       out.write("\t\t\t\t\t\t\t\tpx-8\r\n");
-      out.write("\t\t\t\t\t\t\t\tmt-2\r\n");
+      out.write("\t\t\t\t\t\t\t\tmt-4\r\n");
       out.write("\t\t\t\t\t\t\t\tfocus:outline-none\r\n");
       out.write("\t\t\t\t\t\t\t\thover:bg-blue-600\r\n");
       out.write("\t\t\t\t\t\t\t\ttext-lg\r\n");
