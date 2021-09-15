@@ -29,7 +29,7 @@
         </h1>
       </header>
       <div class="flex flex-1 w-full bg-gray-100">
-        <nav class="w-1/5 border-r border-gray-200">
+        <nav class="w-1/6 min-w-max border-r border-gray-200">
           <div class="flex flex-col gap-2 p-4">
             <a
               href="/SD/pages/index.jsp"
@@ -81,7 +81,21 @@
             </a>
           </div>
         </nav>
-        <main class="w-4/5">
+
+        <main class="flex flex-1 flex-col items-center overflow-scroll">
+					<div class="flex flex-col gap-2 w-2/3 max-w-sm">
+						<h1
+							class="
+								pt-8
+								text-center
+								text-2xl
+								md:text-3xl
+								font-medium
+								text-gray-800
+							"
+						>
+							ホーム
+						</h1>
         </main>
       </div>
     </div>

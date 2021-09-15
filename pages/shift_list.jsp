@@ -99,68 +99,68 @@
     <title>シフト一覧</title>
   </head>
   <body>
-    <form action="/SD/servlet/shift_regist" method="POST">
-      <div class="flex flex-col w-full h-screen">
-        <header class="w-full bg-blue-400 py-4 border-b border-gray-200">
-          <h1 class="text-center text-4xl font-bold text-white">
-            カラオケシステム
-          </h1>
-        </header>
-        <div class="flex flex-1 w-full bg-gray-100">
-          <nav class="w-1/5 border-r border-gray-200">
-            <div class="flex flex-col gap-2 p-4">
-              <a
-                href="/SD/pages/index.jsp"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                ホーム
-              </a>
-              <a
-                href="/SD/pages/shift_join.jsp"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                出勤登録
-              </a>
-              <a
-                href="/SD/pages/shift_leaving.jsp"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                退勤登録
-              </a>
-              <a
-                href="/SD/pages/shift_list.jsp"
-                class="py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full"
-              >
-                シフト一覧
-              </a>
-              <a
-                href="/SD/pages/shift_regist.jsp"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                シフト登録
-              </a>
-              <a
-                href="/SD/pages/employee_list.jsp"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                従業員一覧
-              </a>
-              <a
-                href="/SD/pages/employee_regist.html"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                従業員登録
-              </a>
-              <a
-                href="/SD/pages/signin.html"
-                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-              >
-                ログアウト
-              </a>
-            </div>
-          </nav>
+    <div class="flex flex-col w-full h-screen">
+      <header class="w-full bg-blue-400 py-4 border-b border-gray-200">
+        <h1 class="text-center text-4xl font-bold text-white">
+          カラオケシステム
+        </h1>
+      </header>
+      <div class="flex flex-1 w-full bg-gray-100">
+        <nav class="w-1/6 min-w-max border-r border-gray-200">
+          <div class="flex flex-col gap-2 p-4">
+            <a
+              href="/SD/pages/index.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              ホーム
+            </a>
+            <a
+              href="/SD/pages/shift_join.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              出勤登録
+            </a>
+            <a
+              href="/SD/pages/shift_leaving.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              退勤登録
+            </a>
+            <a
+              href="/SD/pages/shift_list.jsp"
+              class="py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト一覧
+            </a>
+            <a
+              href="/SD/pages/shift_regist.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト登録
+            </a>
+            <a
+              href="/SD/pages/employee_list.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              従業員一覧
+            </a>
+            <a
+              href="/SD/pages/employee_regist.html"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              従業員登録
+            </a>
+            <a
+              href="/SD/pages/signin.html"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              ログアウト
+            </a>
+          </div>
+        </nav>
 
-          <main class="w-4/5 flex flex-col items-center">
+        <main class="flex flex-1 flex-col items-center overflow-scroll">
+          <div class="flex-1 overflow-auto w-full">
             <table class="table w-full">
               <thead>
                 <tr>
@@ -174,9 +174,9 @@
               <tbody>
                 <% for (int i = 0; i < list.size(); i++) { %>
                   <tr>
-                    <td>
+                    <th>
                       <%= list.get(i).get("employee_name") %>
-                    </td> 
+                    </th> 
                     <td>
                       <%= list.get(i).get("shift_join_schedule") %>
                     </td> 
@@ -184,7 +184,7 @@
                       <%= list.get(i).get("shift_leaving_schedule") %>
                     </td> 
                     <td class="text-center w-24">
-                      <form action="/SD/servlet/shift_eidt" method="POST">
+                      <form action="/SD/servlet/shift_edit" method="POST">
                         <input 
                           type="hidden"
                           name="SHIFT_ID"
@@ -204,12 +204,12 @@
                       </form>
                     </td>
                   </tr>
-								<% } %>
+                <% } %>
               </tbody>
             </table>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
-    </form>
+    </div>
   </body>
 </html>
