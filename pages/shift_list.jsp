@@ -142,16 +142,17 @@
             >
               従業員登録
             </a>
+            <hr class="text-gray-300">
             <a
               href="/SD/pages/signin.html"
-              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+              class="py-2 px-6 hover:bg-gray-100 font-bold rounded-full"
             >
               ログアウト
             </a>
           </div>
         </nav>
 
-        <main class="flex flex-1 flex-col items-center overflow-scroll">
+        <main class="flex flex-1 flex-col items-center pb-40 overflow-scroll">
           <div class="flex-1 overflow-auto w-full">
             <table class="table w-full">
               <thead>

@@ -72,9 +72,10 @@
             >
               従業員登録
             </a>
+            <hr class="text-gray-300">
             <a
               href="/SD/pages/signin.html"
-              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+              class="py-2 px-6 hover:bg-gray-100 font-bold rounded-full"
             >
               ログアウト
             </a>
