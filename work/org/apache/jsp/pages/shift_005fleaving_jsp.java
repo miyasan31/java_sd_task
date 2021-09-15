@@ -58,8 +58,16 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\r\n");
       out.write("\r\n");
 
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";
@@ -71,10 +79,10 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
  	StringBuffer SQL = null;
  	ResultSet rs = null;
  	StringBuffer ERMSG = null;
- 	HashMap<String,String> map = null;
- 	ArrayList<HashMap> list = null;
 
- 	list = new ArrayList<HashMap>();
+	 
+	String join_check_result = ""; 
+	String attendance_id = ""; 
 
  	try {
  		Class.forName(DRIVER).newInstance();
@@ -88,15 +96,16 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
  		SQL.append("SELECT attendance_id, employee_name ");
  		SQL.append("FROM attendance, employee ");
  		SQL.append("WHERE attendance.employee_id = employee.employee_id ");
- 		SQL.append("AND attendance_leaving IS NULL");
+		SQL.append("AND attendance.employee_id = '");
+		SQL.append(employee_id);
+		SQL.append("' ");
+ 		SQL.append("AND attendance_leaving IS NULL ");
 
  		rs = stmt.executeQuery(SQL.toString());
 
- 		while (rs.next()) {
-			map = new HashMap<String,String>();
-			map.put("attendance_id",rs.getString("attendance_id"));
-			map.put("employee_name",rs.getString("employee_name"));
-			list.add(map);
+ 		if (rs.next()) {
+			join_check_result = rs.getString("employee_name");
+			attendance_id = rs.getString("attendance_id");
 		}
 
 	} catch (ClassNotFoundException e) {
@@ -191,19 +200,28 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\t\t\t\t\t\t\t>\r\n");
       out.write("\t\t\t\t\t\t\t\t従業員一覧\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
-      out.write("\t\t\t\t\t\t\t<a\r\n");
-      out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/employee_regist.html\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
-      out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t\t従業員登録\r\n");
-      out.write("\t\t\t\t\t\t\t</a>\r\n");
-      out.write("            \t<hr class=\"text-gray-300\">\r\n");
-      out.write("\t\t\t\t\t\t\t<a\r\n");
-      out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/signin.html\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
-      out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t\tログアウト\r\n");
-      out.write("\t\t\t\t\t\t\t</a>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ if (employee_type.equals("1") || employee_type.equals("2")) { 
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t\t<a\r\n");
+      out.write("\t\t\t\t\t\t\t\t\thref=\"/SD/pages/employee_regist.jsp\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t従業員登録\r\n");
+      out.write("\t\t\t\t\t\t\t\t</a>\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("              <hr class=\"text-gray-300\">\r\n");
+      out.write("              \r\n");
+      out.write("              <a\r\n");
+      out.write("                href=\"/SD/pages/signout.jsp\"\r\n");
+      out.write("                class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              >\r\n");
+      out.write("                サインアウト\r\n");
+      out.write("              </a>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t</nav>\r\n");
       out.write("\r\n");
@@ -221,43 +239,54 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\t\t\t\t\t\t\t>\r\n");
       out.write("\t\t\t\t\t\t\t\t退勤登録\r\n");
       out.write("\t\t\t\t\t\t\t</h1>\r\n");
+      out.write("\t\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ if (join_check_result.equals("")) { 
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<label\r\n");
-      out.write("\t\t\t\t\t\t\t\tfor=\"employee_id\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t>従業員氏名</label\r\n");
-      out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t<select id=\"employee_id\" name=\"ATTENDANCE_ID\" class=\"select select-bordered select-info w-full\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<option selected disabled>選択してください</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t");
- for (int i = 0; i < list.size(); i++) { 
+      out.write("\t\t\t\t\t\t\t\t<p class=\"pt-4 text-center text-lg text-red-400\">出勤していません</p>\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ } else { 
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<option value=\"");
-      out.print( list.get(i).get("attendance_id") );
-      out.write("\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t");
-      out.print( list.get(i).get("employee_name") );
+      out.write("\t\t\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tfor=\"employee_id\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t>従業員氏名</label\r\n");
+      out.write("\t\t\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t\t\t<input \r\n");
+      out.write("\t\t\t\t\t\t\t\t\ttype=\"text\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tvalue=\"");
+      out.print( join_check_result );
+      out.write("\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tdisabled\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t/>\r\n");
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t");
+      out.write("\t\t\t\t\t\t\t\t<input \r\n");
+      out.write("\t\t\t\t\t\t\t\t\ttype=\"hidden\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tname=\"ATTENDANCE_ID\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tvalue=\"");
+      out.print( attendance_id );
+      out.write("\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t/>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t\t<button class=\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tw-full\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tmx-auto\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\ttext-white\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tbg-blue-500\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tborder-0\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tpy-3\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tpx-8\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tmt-2\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\tfocus:outline-none\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\thover:bg-blue-600\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\ttext-lg\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t\trounded-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t>退勤</button>\r\n");
+      out.write("\t\t\t\t\t\t\t");
  } 
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t</select>\r\n");
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<button class=\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tw-full\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tmx-auto\r\n");
-      out.write("\t\t\t\t\t\t\t\t\ttext-white\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tbg-blue-500\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tborder-0\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tpy-3\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tpx-8\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tmt-2\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tfocus:outline-none\r\n");
-      out.write("\t\t\t\t\t\t\t\t\thover:bg-blue-600\r\n");
-      out.write("\t\t\t\t\t\t\t\t\ttext-lg\r\n");
-      out.write("\t\t\t\t\t\t\t\t\trounded-full\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t>送信</button>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t</main>\r\n");
       out.write("\t\t\t\t</div>\r\n");

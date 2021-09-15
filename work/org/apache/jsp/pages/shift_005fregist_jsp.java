@@ -58,70 +58,20 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\r\n");
       out.write("\r\n");
 
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+  
 
- 	String USER = "miyasan";
- 	String PASSWORD = "0301";
- 	String URL = "jdbc:mysql://localhost/sd_kadai";
- 	String DRIVER = "com.mysql.jdbc.Driver";
-
- 	Connection con = null;
- 	Statement stmt = null;
- 	StringBuffer SQL = null;
- 	ResultSet rs = null;
- 	StringBuffer ERMSG = null;
- 	HashMap<String,String> map = null;
- 	ArrayList<HashMap> list = null;
-	 
- 	list = new ArrayList<HashMap>();
-
- 	try {
- 		Class.forName(DRIVER).newInstance();
-
- 		con = DriverManager.getConnection(URL,USER,PASSWORD);
-
- 		stmt = con.createStatement();
-
- 		SQL = new StringBuffer();
-
- 		SQL.append("SELECT employee_id, employee_name FROM employee");
-
- 		rs = stmt.executeQuery(SQL.toString());
-
- 		while (rs.next()) {
-			map = new HashMap<String,String>();
-			map.put("employee_id",rs.getString("employee_id"));
-			map.put("employee_name",rs.getString("employee_name"));
-			list.add(map);
-		}
-
-	} catch (ClassNotFoundException e) {
-		ERMSG = new StringBuffer();
-		ERMSG.append(e.getMessage());
-	} catch (SQLException e) {
-		ERMSG = new StringBuffer();
-		ERMSG.append(e.getMessage());
-	} catch (Exception e) {
-		ERMSG = new StringBuffer();
-		ERMSG.append(e.getMessage());
-	} finally {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-			if (stmt != null) {
-				stmt.close();
-			}
-			if (con != null) {
-				con.close();
-			}
-		} catch (SQLException e) {
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
-		}
-	}
-
+      out.write('\r');
+      out.write('\n');
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n");
@@ -188,18 +138,27 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\t\t\t\t\t\t\t>\r\n");
       out.write("\t\t\t\t\t\t\t\t従業員一覧\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ if (employee_type.equals("1") || employee_type.equals("2")) { 
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t\t<a\r\n");
+      out.write("\t\t\t\t\t\t\t\t\thref=\"/SD/pages/employee_regist.jsp\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t\t\t\t従業員登録\r\n");
+      out.write("\t\t\t\t\t\t\t\t</a>\r\n");
+      out.write("\t\t\t\t\t\t\t");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t<hr class=\"text-gray-300\">\r\n");
+      out.write("\t\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t\t<a\r\n");
-      out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/employee_regist.html\"\r\n");
+      out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/signout.jsp\"\r\n");
       out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t\t従業員登録\r\n");
-      out.write("\t\t\t\t\t\t\t</a>\r\n");
-      out.write("            \t<hr class=\"text-gray-300\">\r\n");
-      out.write("\t\t\t\t\t\t\t<a\r\n");
-      out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/signin.html\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
-      out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t\tログアウト\r\n");
+      out.write("\t\t\t\t\t\t\t\tサインアウト\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
       out.write("\t\t\t\t\t\t</div>\r\n");
       out.write("\t\t\t\t\t</nav>\r\n");
@@ -224,22 +183,22 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\t\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
       out.write("\t\t\t\t\t\t\t\t>従業員氏名</label\r\n");
       out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t<select id=\"employee_id\" name=\"EMPLOYEE_ID\" class=\"select select-bordered select-info w-full\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<option selected disabled>選択してください</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t");
- for (int i = 0; i < list.size(); i++) { 
+      out.write("\t\t\t\t\t\t\t<input \r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"text\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"");
+      out.print( employee_name );
+      out.write("\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tdisabled\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<option value=\"");
-      out.print( list.get(i).get("employee_id") );
-      out.write("\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t");
-      out.print( list.get(i).get("employee_name") );
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t");
- } 
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t</select>\r\n");
+      out.write("\t\t\t\t\t\t\t<input \r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"hidden\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tname=\"EMPLOYEE_ID\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"");
+      out.print( employee_id );
+      out.write("\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
       out.write("\t\t\t\t\t\t\t\r\n");
       out.write("\t\t\t\t\t\t\t<label\r\n");
       out.write("\t\t\t\t\t\t\t\tfor=\"shift_join_ymd\"\r\n");

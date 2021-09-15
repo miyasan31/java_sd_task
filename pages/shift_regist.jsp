@@ -3,8 +3,19 @@
 <%@ page import = "java.util.HashMap" %>
 <%@ page import = "java.util.ArrayList" %>
 <%
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+  
+%>
+<%-- <%
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";
@@ -36,8 +47,8 @@
 
  		while (rs.next()) {
 			map = new HashMap<String,String>();
-			map.put("employee_id",rs.getString("employee_id"));
-			map.put("employee_name",rs.getString("employee_name"));
+			map.put("employee_id", rs.getString("employee_id"));
+			map.put("employee_name", rs.getString("employee_name"));
 			list.add(map);
 		}
 
@@ -66,7 +77,7 @@
 			ERMSG.append(e.getMessage());
 		}
 	}
-%>
+%> --%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -132,18 +143,23 @@
 							>
 								従業員一覧
 							</a>
+
+							<% if (employee_type.equals("1") || employee_type.equals("2")) { %>
+								<a
+									href="/SD/pages/employee_regist.jsp"
+									class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+								>
+									従業員登録
+								</a>
+							<% } %>
+
+							<hr class="text-gray-300">
+							
 							<a
-								href="/SD/pages/employee_regist.html"
+								href="/SD/pages/signout.jsp"
 								class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
 							>
-								従業員登録
-							</a>
-            	<hr class="text-gray-300">
-							<a
-								href="/SD/pages/signin.html"
-								class="py-2 px-6 hover:bg-gray-200 font-bold rounded-full"
-							>
-								ログアウト
+								サインアウト
 							</a>
 						</div>
 					</nav>
@@ -168,14 +184,18 @@
 								class="pl-1 text-gray-600"
 								>従業員氏名</label
 							>
-							<select id="employee_id" name="EMPLOYEE_ID" class="select select-bordered select-info w-full">
-								<option selected disabled>選択してください</option>
-								<% for (int i = 0; i < list.size(); i++) { %>
-									<option value="<%= list.get(i).get("employee_id") %>">
-										<%= list.get(i).get("employee_name") %>
-									</option>
-								<% } %>
-							</select>
+							<input 
+								type="text"
+								value="<%= employee_name %>"
+								disabled
+								class="input input-info input-bordered w-full"
+							/>
+
+							<input 
+								type="hidden"
+								name="EMPLOYEE_ID"
+								value="<%= employee_id %>"
+							/>
 							
 							<label
 								for="shift_join_ymd"

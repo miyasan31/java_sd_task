@@ -60,7 +60,15 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
 
   request.setCharacterEncoding("UTF-8");
   response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
   
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+
   String USER = "miyasan";
   String PASSWORD = "0301";
   String URL = "jdbc:mysql://localhost/sd_kadai";
@@ -94,17 +102,17 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
 
     while (rs.next()) {
       map = new HashMap<String,String>();
-      map.put("employee_id",rs.getString("employee_id"));
-      map.put("employee_name",rs.getString("employee_name"));
-      map.put("employee_name_sub",rs.getString("employee_name_sub"));
-      map.put("employee_birthday",rs.getString("employee_birthday"));
-      map.put("employee_gender",rs.getString("employee_gender"));
-      map.put("employee_email",rs.getString("employee_email"));
-      map.put("employee_phone",rs.getString("employee_phone"));
-      map.put("employee_zipcode",rs.getString("employee_zipcode"));
-      map.put("employee_address",rs.getString("employee_address"));
-      map.put("employee_type",rs.getString("employee_type"));
-      map.put("company_join",rs.getString("company_join"));
+      map.put("employee_id", rs.getString("employee_id"));
+      map.put("employee_name", rs.getString("employee_name"));
+      map.put("employee_name_sub", rs.getString("employee_name_sub"));
+      map.put("employee_birthday", rs.getString("employee_birthday"));
+      map.put("employee_gender", rs.getString("employee_gender"));
+      map.put("employee_email", rs.getString("employee_email"));
+      map.put("employee_phone", rs.getString("employee_phone"));
+      map.put("employee_zipcode", rs.getString("employee_zipcode"));
+      map.put("employee_address", rs.getString("employee_address"));
+      map.put("employee_type", rs.getString("employee_type"));
+      map.put("company_join", rs.getString("company_join"));
       list.add(map);
     }
 
@@ -200,18 +208,27 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("            >\r\n");
       out.write("              従業員一覧\r\n");
       out.write("            </a>\r\n");
+      out.write("\r\n");
+      out.write("            ");
+ if (employee_type.equals("1") || employee_type.equals("2")) { 
+      out.write("\r\n");
+      out.write("              <a\r\n");
+      out.write("                href=\"/SD/pages/employee_regist.jsp\"\r\n");
+      out.write("                class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              >\r\n");
+      out.write("                従業員登録\r\n");
+      out.write("              </a>\r\n");
+      out.write("            ");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("            <hr class=\"text-gray-300\">\r\n");
+      out.write("            \r\n");
       out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/employee_regist.html\"\r\n");
+      out.write("              href=\"/SD/pages/signout.jsp\"\r\n");
       out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
-      out.write("              従業員登録\r\n");
-      out.write("            </a>\r\n");
-      out.write("            <hr class=\"text-gray-300\">\r\n");
-      out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/signin.html\"\r\n");
-      out.write("              class=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
-      out.write("            >\r\n");
-      out.write("              ログアウト\r\n");
+      out.write("              サインアウト\r\n");
       out.write("            </a>\r\n");
       out.write("          </div>\r\n");
       out.write("        </nav>\r\n");
@@ -228,9 +245,9 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("                  <th>電話番号</th> \r\n");
       out.write("                  <th>メールアドレス</th> \r\n");
       out.write("                  <th>従業員タイプ</th> \r\n");
-      out.write("                  <th>入社年月日</th> \r\n");
+      out.write("                  <th>入社年月日</th>                   \r\n");
       out.write("                  <th></th>\r\n");
-      out.write("                  <th></th>\r\n");
+      out.write("\r\n");
       out.write("                </tr>\r\n");
       out.write("              </thead> \r\n");
       out.write("              <tbody>\r\n");
@@ -242,12 +259,14 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("                      ");
       out.print( list.get(i).get("employee_name") );
       out.write("\r\n");
-      out.write("                    </th> \r\n");
+      out.write("                    </th>\r\n");
+      out.write("\r\n");
       out.write("                    <td>\r\n");
       out.write("                      ");
       out.print( list.get(i).get("employee_name_sub") );
       out.write("\r\n");
-      out.write("                    </td> \r\n");
+      out.write("                    </td>\r\n");
+      out.write("\r\n");
       out.write("                    <td>\r\n");
       out.write("                      ");
       out.print( list.get(i).get("employee_birthday") );
@@ -275,6 +294,7 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.print( list.get(i).get("employee_phone") );
       out.write("\r\n");
       out.write("                    </td> \r\n");
+      out.write("\r\n");
       out.write("                    <td>\r\n");
       out.write("                      ");
       out.print( list.get(i).get("employee_email") );
@@ -302,30 +322,39 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.print( list.get(i).get("company_join") );
       out.write("\r\n");
       out.write("                    </td> \r\n");
-      out.write("                    <td class=\"text-center w-24\">\r\n");
-      out.write("                      <form action=\"/SD/servlet/employee_edit\" method=\"POST\">\r\n");
-      out.write("                        <input \r\n");
-      out.write("                          type=\"hidden\"\r\n");
-      out.write("                          name=\"EMPLOYEE_ID\"\r\n");
-      out.write("                          value=\"");
+      out.write("                    \r\n");
+      out.write("                    ");
+ if (employee_type.equals("1") || employee_type.equals("2") || employee_id.equals(list.get(i).get("employee_id")) ) { 
+      out.write("\r\n");
+      out.write("                      <td class=\"text-center w-24 px-1\">\r\n");
+      out.write("                        <form action=\"/SD/servlet/employee_edit\" method=\"POST\">\r\n");
+      out.write("                          <input \r\n");
+      out.write("                            type=\"hidden\"\r\n");
+      out.write("                            name=\"EMPLOYEE_ID\"\r\n");
+      out.write("                            value=\"");
       out.print( list.get(i).get("employee_id") );
       out.write("\"\r\n");
-      out.write("                        />\r\n");
-      out.write("                        <button class=\"btn btn-sm btn-info\">編集</button>\r\n");
-      out.write("                      </form>\r\n");
-      out.write("                    </td>\r\n");
-      out.write("                    <td class=\"text-center w-24\">\r\n");
-      out.write("                      <form action=\"/SD/servlet/employee_delete\" method=\"POST\">\r\n");
-      out.write("                        <input \r\n");
-      out.write("                          type=\"hidden\"\r\n");
-      out.write("                          name=\"EMPLOYEE_ID\"\r\n");
-      out.write("                          value=\"");
-      out.print( list.get(i).get("employee_id") );
-      out.write("\"\r\n");
-      out.write("                        />\r\n");
-      out.write("                        <button class=\"btn btn-sm btn-error\">削除</button>\r\n");
-      out.write("                      </form>\r\n");
-      out.write("                    </td>\r\n");
+      out.write("                          />\r\n");
+      out.write("                          <button class=\"\r\n");
+      out.write("                            text-white\r\n");
+      out.write("                            bg-gray-400\r\n");
+      out.write("                            border-0\r\n");
+      out.write("                            py-1\r\n");
+      out.write("                            px-4\r\n");
+      out.write("                            focus:outline-none\r\n");
+      out.write("                            hover:bg-gray-500\r\n");
+      out.write("                            rounded-full\"\r\n");
+      out.write("                          >編集</button>\r\n");
+      out.write("                        </form>\r\n");
+      out.write("                      </td>\r\n");
+      out.write("                    ");
+ } else { 
+      out.write("\r\n");
+      out.write("                      <th></th>\r\n");
+      out.write("                    ");
+ } 
+      out.write("\r\n");
+      out.write("                    \r\n");
       out.write("                  </tr>\r\n");
       out.write("                ");
  } 

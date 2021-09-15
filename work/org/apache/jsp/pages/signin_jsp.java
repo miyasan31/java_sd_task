@@ -53,7 +53,9 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\r');
       out.write('\n');
 
-  response.setContentType("text/html; charset=UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
   String error = request.getAttribute("error").toString(); 
 
       out.write("\r\n");
@@ -61,7 +63,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html lang=\"en\">\r\n");
       out.write("  <head>\r\n");
-      out.write("    <meta charset=\"UTF-8\" />\r\n");
+      out.write("\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n");
       out.write("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n");
       out.write("    <link\r\n");
@@ -97,9 +99,9 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            サインイン\r\n");
       out.write("          </h1>\r\n");
       out.write("          \r\n");
-      out.write("          <label class=\"pl-2 text-lg text-gray-600 text-red-400\">\r\n");
+      out.write("          <p class=\"pl-2 text-lg text-red-400\">\r\n");
       out.write("            メールアドレスまたはパスワードが間違っています\r\n");
-      out.write("          </label>\r\n");
+      out.write("          </p>\r\n");
       out.write("\r\n");
       out.write("          <label for=\"email\" class=\"pl-2 text-gray-600\">\r\n");
       out.write("            メールアドレス\r\n");

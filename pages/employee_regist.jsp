@@ -1,7 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "java.util.HashMap" %>
+<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "javax.servlet.*" %>
+<%@ page import = "javax.servlet.http.*" %>
+<%
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -62,25 +82,23 @@
               >
                 従業員一覧
               </a>
+
+              <% if (employee_type.equals("1") || employee_type.equals("2")) { %>
+                <a
+                  href="/SD/pages/employee_regist.jsp"
+                  class="py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full"
+                >
+                  従業員登録
+                </a>
+              <% } %>
+
+              <hr class="text-gray-300">
+              
               <a
-                href="/SD/pages/employee_regist.html"
-                class="
-                  py-2
-                  px-6
-                  bg-blue-200
-                  hover:bg-blue-100
-                  font-bold
-                  rounded-full
-                "
+                href="/SD/pages/signout.jsp"
+                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
               >
-                従業員登録
-              </a>
-              <hr class="text-gray-300" />
-              <a
-                href="/SD/pages/signin.html"
-                class="py-2 px-6 hover:bg-gray-200 font-bold rounded-full"
-              >
-                ログアウト
+                サインアウト
               </a>
             </div>
           </nav>

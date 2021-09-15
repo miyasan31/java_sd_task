@@ -58,9 +58,17 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("\r\n");
       out.write("\r\n");
 
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
-
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+  
  	String USER = "miyasan";
  	String PASSWORD = "0301";
  	String URL = "jdbc:mysql://localhost/sd_kadai";
@@ -85,7 +93,7 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
 
  		SQL = new StringBuffer();
 
- 		SQL.append("SELECT shift_id, employee_name, shift_join_schedule, shift_leaving_schedule ");
+ 		SQL.append("SELECT shift_id, employee.employee_id, employee_name, shift_join_schedule, shift_leaving_schedule ");
  		SQL.append("FROM work_shift, employee ");
  		SQL.append("WHERE work_shift.employee_id = employee.employee_id ");
  		SQL.append("ORDER BY work_shift.shift_join_schedule");
@@ -94,10 +102,11 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
 
  		while (rs.next()) {
       map = new HashMap<String,String>();
-      map.put("shift_id",rs.getString("shift_id"));
-      map.put("employee_name",rs.getString("employee_name"));
-      map.put("shift_join_schedule",rs.getString("shift_join_schedule"));
-      map.put("shift_leaving_schedule",rs.getString("shift_leaving_schedule"));
+      map.put("shift_id", rs.getString("shift_id"));
+      map.put("employee_id", rs.getString("employee_id"));
+      map.put("employee_name", rs.getString("employee_name"));
+      map.put("shift_join_schedule", rs.getString("shift_join_schedule"));
+      map.put("shift_leaving_schedule", rs.getString("shift_leaving_schedule"));
       list.add(map);
 		}
 
@@ -192,18 +201,27 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            >\r\n");
       out.write("              従業員一覧\r\n");
       out.write("            </a>\r\n");
+      out.write("\r\n");
+      out.write("            ");
+ if (employee_type.equals("1") || employee_type.equals("2")) { 
+      out.write("\r\n");
+      out.write("              <a\r\n");
+      out.write("                href=\"/SD/pages/employee_regist.jsp\"\r\n");
+      out.write("                class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              >\r\n");
+      out.write("                従業員登録\r\n");
+      out.write("              </a>\r\n");
+      out.write("            ");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("            <hr class=\"text-gray-300\">\r\n");
+      out.write("            \r\n");
       out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/employee_regist.html\"\r\n");
+      out.write("              href=\"/SD/pages/signout.jsp\"\r\n");
       out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
-      out.write("              従業員登録\r\n");
-      out.write("            </a>\r\n");
-      out.write("            <hr class=\"text-gray-300\">\r\n");
-      out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/signin.html\"\r\n");
-      out.write("              class=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
-      out.write("            >\r\n");
-      out.write("              ログアウト\r\n");
+      out.write("              サインアウト\r\n");
       out.write("            </a>\r\n");
       out.write("          </div>\r\n");
       out.write("        </nav>\r\n");
@@ -215,8 +233,7 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("                <tr>\r\n");
       out.write("                  <th>従業員氏名</th> \r\n");
       out.write("                  <th>出勤予定日</th> \r\n");
-      out.write("                  <th>退勤予定日</th> \r\n");
-      out.write("                  <th></th>\r\n");
+      out.write("                  <th>退勤予定日</th>\r\n");
       out.write("                  <th></th>\r\n");
       out.write("                </tr>\r\n");
       out.write("              </thead> \r\n");
@@ -239,31 +256,40 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("                      ");
       out.print( list.get(i).get("shift_leaving_schedule") );
       out.write("\r\n");
-      out.write("                    </td> \r\n");
-      out.write("                    <td class=\"text-center w-24\">\r\n");
-      out.write("                      <form action=\"/SD/servlet/shift_edit\" method=\"POST\">\r\n");
-      out.write("                        <input \r\n");
-      out.write("                          type=\"hidden\"\r\n");
-      out.write("                          name=\"SHIFT_ID\"\r\n");
-      out.write("                          value=\"");
+      out.write("                    </td>\r\n");
+      out.write("\r\n");
+      out.write("                    ");
+ if (employee_type.equals("1") || employee_id.equals(list.get(i).get("employee_id")) ) { 
+      out.write("\r\n");
+      out.write("                      <td class=\"text-center w-24\">\r\n");
+      out.write("                        <form action=\"/SD/servlet/shift_edit\" method=\"POST\">\r\n");
+      out.write("                          <input \r\n");
+      out.write("                            type=\"hidden\"\r\n");
+      out.write("                            name=\"SHIFT_ID\"\r\n");
+      out.write("                            value=\"");
       out.print( list.get(i).get("shift_id") );
       out.write("\"\r\n");
-      out.write("                        />\r\n");
-      out.write("                        <button class=\"btn btn-sm btn-info\">編集</button>\r\n");
-      out.write("                      </form>\r\n");
-      out.write("                    </td>\r\n");
-      out.write("                    <td class=\"text-center w-24\">\r\n");
-      out.write("                      <form action=\"/SD/servlet/shift_delete\" method=\"POST\">\r\n");
-      out.write("                        <input \r\n");
-      out.write("                          type=\"hidden\"\r\n");
-      out.write("                          name=\"SHIFT_ID\"\r\n");
-      out.write("                          value=\"");
-      out.print( list.get(i).get("shift_id") );
-      out.write("\"\r\n");
-      out.write("                        />\r\n");
-      out.write("                        <button class=\"btn btn-sm btn-error\">削除</button>\r\n");
-      out.write("                      </form>\r\n");
-      out.write("                    </td>\r\n");
+      out.write("                          />\r\n");
+      out.write("                          <button class=\"\r\n");
+      out.write("                            text-white\r\n");
+      out.write("                            bg-gray-400\r\n");
+      out.write("                            border-0\r\n");
+      out.write("                            py-1\r\n");
+      out.write("                            px-4\r\n");
+      out.write("                            focus:outline-none\r\n");
+      out.write("                            hover:bg-gray-500\r\n");
+      out.write("                            rounded-full\"\r\n");
+      out.write("                          >編集</button>\r\n");
+      out.write("                        </form>\r\n");
+      out.write("                      </td>\r\n");
+      out.write("                    ");
+ } else { 
+      out.write("\r\n");
+      out.write("                      <th></th>\r\n");
+      out.write("                    ");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("                  </tr>\r\n");
       out.write("                ");
  } 

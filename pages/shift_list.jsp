@@ -3,9 +3,17 @@
 <%@ page import = "java.util.HashMap" %>
 <%@ page import = "java.util.ArrayList" %>
 <%
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
-
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+  
  	String USER = "miyasan";
  	String PASSWORD = "0301";
  	String URL = "jdbc:mysql://localhost/sd_kadai";
@@ -30,7 +38,7 @@
 
  		SQL = new StringBuffer();
 
- 		SQL.append("SELECT shift_id, employee_name, shift_join_schedule, shift_leaving_schedule ");
+ 		SQL.append("SELECT shift_id, employee.employee_id, employee_name, shift_join_schedule, shift_leaving_schedule ");
  		SQL.append("FROM work_shift, employee ");
  		SQL.append("WHERE work_shift.employee_id = employee.employee_id ");
  		SQL.append("ORDER BY work_shift.shift_join_schedule");
@@ -39,10 +47,11 @@
 
  		while (rs.next()) {
       map = new HashMap<String,String>();
-      map.put("shift_id",rs.getString("shift_id"));
-      map.put("employee_name",rs.getString("employee_name"));
-      map.put("shift_join_schedule",rs.getString("shift_join_schedule"));
-      map.put("shift_leaving_schedule",rs.getString("shift_leaving_schedule"));
+      map.put("shift_id", rs.getString("shift_id"));
+      map.put("employee_id", rs.getString("employee_id"));
+      map.put("employee_name", rs.getString("employee_name"));
+      map.put("shift_join_schedule", rs.getString("shift_join_schedule"));
+      map.put("shift_leaving_schedule", rs.getString("shift_leaving_schedule"));
       list.add(map);
 		}
 
@@ -136,18 +145,23 @@
             >
               従業員一覧
             </a>
+
+            <% if (employee_type.equals("1") || employee_type.equals("2")) { %>
+              <a
+                href="/SD/pages/employee_regist.jsp"
+                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+              >
+                従業員登録
+              </a>
+            <% } %>
+
+            <hr class="text-gray-300">
+            
             <a
-              href="/SD/pages/employee_regist.html"
+              href="/SD/pages/signout.jsp"
               class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
             >
-              従業員登録
-            </a>
-            <hr class="text-gray-300">
-            <a
-              href="/SD/pages/signin.html"
-              class="py-2 px-6 hover:bg-gray-200 font-bold rounded-full"
-            >
-              ログアウト
+              サインアウト
             </a>
           </div>
         </nav>
@@ -159,8 +173,7 @@
                 <tr>
                   <th>従業員氏名</th> 
                   <th>出勤予定日</th> 
-                  <th>退勤予定日</th> 
-                  <th></th>
+                  <th>退勤予定日</th>
                   <th></th>
                 </tr>
               </thead> 
@@ -175,27 +188,32 @@
                     </td> 
                     <td>
                       <%= list.get(i).get("shift_leaving_schedule") %>
-                    </td> 
-                    <td class="text-center w-24">
-                      <form action="/SD/servlet/shift_edit" method="POST">
-                        <input 
-                          type="hidden"
-                          name="SHIFT_ID"
-                          value="<%= list.get(i).get("shift_id") %>"
-                        />
-                        <button class="btn btn-sm btn-info">編集</button>
-                      </form>
                     </td>
-                    <td class="text-center w-24">
-                      <form action="/SD/servlet/shift_delete" method="POST">
-                        <input 
-                          type="hidden"
-                          name="SHIFT_ID"
-                          value="<%= list.get(i).get("shift_id") %>"
-                        />
-                        <button class="btn btn-sm btn-error">削除</button>
-                      </form>
-                    </td>
+
+                    <% if (employee_type.equals("1") || employee_id.equals(list.get(i).get("employee_id")) ) { %>
+                      <td class="text-center w-24">
+                        <form action="/SD/servlet/shift_edit" method="POST">
+                          <input 
+                            type="hidden"
+                            name="SHIFT_ID"
+                            value="<%= list.get(i).get("shift_id") %>"
+                          />
+                          <button class="
+                            text-white
+                            bg-gray-400
+                            border-0
+                            py-1
+                            px-4
+                            focus:outline-none
+                            hover:bg-gray-500
+                            rounded-full"
+                          >編集</button>
+                        </form>
+                      </td>
+                    <% } else { %>
+                      <th></th>
+                    <% } %>
+
                   </tr>
                 <% } %>
               </tbody>

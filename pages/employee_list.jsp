@@ -5,7 +5,15 @@
 <%
   request.setCharacterEncoding("UTF-8");
   response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
   
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+
   String USER = "miyasan";
   String PASSWORD = "0301";
   String URL = "jdbc:mysql://localhost/sd_kadai";
@@ -39,17 +47,17 @@
 
     while (rs.next()) {
       map = new HashMap<String,String>();
-      map.put("employee_id",rs.getString("employee_id"));
-      map.put("employee_name",rs.getString("employee_name"));
-      map.put("employee_name_sub",rs.getString("employee_name_sub"));
-      map.put("employee_birthday",rs.getString("employee_birthday"));
-      map.put("employee_gender",rs.getString("employee_gender"));
-      map.put("employee_email",rs.getString("employee_email"));
-      map.put("employee_phone",rs.getString("employee_phone"));
-      map.put("employee_zipcode",rs.getString("employee_zipcode"));
-      map.put("employee_address",rs.getString("employee_address"));
-      map.put("employee_type",rs.getString("employee_type"));
-      map.put("company_join",rs.getString("company_join"));
+      map.put("employee_id", rs.getString("employee_id"));
+      map.put("employee_name", rs.getString("employee_name"));
+      map.put("employee_name_sub", rs.getString("employee_name_sub"));
+      map.put("employee_birthday", rs.getString("employee_birthday"));
+      map.put("employee_gender", rs.getString("employee_gender"));
+      map.put("employee_email", rs.getString("employee_email"));
+      map.put("employee_phone", rs.getString("employee_phone"));
+      map.put("employee_zipcode", rs.getString("employee_zipcode"));
+      map.put("employee_address", rs.getString("employee_address"));
+      map.put("employee_type", rs.getString("employee_type"));
+      map.put("company_join", rs.getString("company_join"));
       list.add(map);
     }
 
@@ -144,18 +152,23 @@
             >
               従業員一覧
             </a>
+
+            <% if (employee_type.equals("1") || employee_type.equals("2")) { %>
+              <a
+                href="/SD/pages/employee_regist.jsp"
+                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+              >
+                従業員登録
+              </a>
+            <% } %>
+
+            <hr class="text-gray-300">
+            
             <a
-              href="/SD/pages/employee_regist.html"
+              href="/SD/pages/signout.jsp"
               class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
             >
-              従業員登録
-            </a>
-            <hr class="text-gray-300">
-            <a
-              href="/SD/pages/signin.html"
-              class="py-2 px-6 hover:bg-gray-200 font-bold rounded-full"
-            >
-              ログアウト
+              サインアウト
             </a>
           </div>
         </nav>
@@ -172,9 +185,9 @@
                   <th>電話番号</th> 
                   <th>メールアドレス</th> 
                   <th>従業員タイプ</th> 
-                  <th>入社年月日</th> 
+                  <th>入社年月日</th>                   
                   <th></th>
-                  <th></th>
+
                 </tr>
               </thead> 
               <tbody>
@@ -182,10 +195,12 @@
                   <tr>
                     <th>
                       <%= list.get(i).get("employee_name") %>
-                    </th> 
+                    </th>
+
                     <td>
                       <%= list.get(i).get("employee_name_sub") %>
-                    </td> 
+                    </td>
+
                     <td>
                       <%= list.get(i).get("employee_birthday") %>
                     </td> 
@@ -201,6 +216,7 @@
                     <td>
                       <%= list.get(i).get("employee_phone") %>
                     </td> 
+
                     <td>
                       <%= list.get(i).get("employee_email") %>
                     </td> 
@@ -216,26 +232,31 @@
                     <td>
                       <%= list.get(i).get("company_join") %>
                     </td> 
-                    <td class="text-center w-24">
-                      <form action="/SD/servlet/employee_edit" method="POST">
-                        <input 
-                          type="hidden"
-                          name="EMPLOYEE_ID"
-                          value="<%= list.get(i).get("employee_id") %>"
-                        />
-                        <button class="btn btn-sm btn-info">編集</button>
-                      </form>
-                    </td>
-                    <td class="text-center w-24">
-                      <form action="/SD/servlet/employee_delete" method="POST">
-                        <input 
-                          type="hidden"
-                          name="EMPLOYEE_ID"
-                          value="<%= list.get(i).get("employee_id") %>"
-                        />
-                        <button class="btn btn-sm btn-error">削除</button>
-                      </form>
-                    </td>
+                    
+                    <% if (employee_type.equals("1") || employee_type.equals("2") || employee_id.equals(list.get(i).get("employee_id")) ) { %>
+                      <td class="text-center w-24 px-1">
+                        <form action="/SD/servlet/employee_edit" method="POST">
+                          <input 
+                            type="hidden"
+                            name="EMPLOYEE_ID"
+                            value="<%= list.get(i).get("employee_id") %>"
+                          />
+                          <button class="
+                            text-white
+                            bg-gray-400
+                            border-0
+                            py-1
+                            px-4
+                            focus:outline-none
+                            hover:bg-gray-500
+                            rounded-full"
+                          >編集</button>
+                        </form>
+                      </td>
+                    <% } else { %>
+                      <th></th>
+                    <% } %>
+                    
                   </tr>
                 <% } %>
               </tbody>

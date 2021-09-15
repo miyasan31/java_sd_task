@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
-  response.setContentType("text/html; charset=UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
   String error = request.getAttribute("error").toString(); 
 %>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
@@ -20,7 +22,7 @@
       rel="stylesheet"
       type="text/css"
     />
-    <title>Document</title>
+    <title>サインイン</title>
   </head>
 
   <body>
@@ -43,9 +45,9 @@
             サインイン
           </h1>
           
-          <label class="pl-2 text-lg text-gray-600 text-red-400">
+          <p class="pl-2 text-lg text-red-400">
             メールアドレスまたはパスワードが間違っています
-          </label>
+          </p>
 
           <label for="email" class="pl-2 text-gray-600">
             メールアドレス

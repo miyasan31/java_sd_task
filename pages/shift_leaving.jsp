@@ -3,8 +3,16 @@
 <%@ page import = "java.util.HashMap" %>
 <%@ page import = "java.util.ArrayList" %>
 <%
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";
@@ -16,10 +24,10 @@
  	StringBuffer SQL = null;
  	ResultSet rs = null;
  	StringBuffer ERMSG = null;
- 	HashMap<String,String> map = null;
- 	ArrayList<HashMap> list = null;
 
- 	list = new ArrayList<HashMap>();
+	 
+	String join_check_result = ""; 
+	String attendance_id = ""; 
 
  	try {
  		Class.forName(DRIVER).newInstance();
@@ -33,15 +41,16 @@
  		SQL.append("SELECT attendance_id, employee_name ");
  		SQL.append("FROM attendance, employee ");
  		SQL.append("WHERE attendance.employee_id = employee.employee_id ");
- 		SQL.append("AND attendance_leaving IS NULL");
+		SQL.append("AND attendance.employee_id = '");
+		SQL.append(employee_id);
+		SQL.append("' ");
+ 		SQL.append("AND attendance_leaving IS NULL ");
 
  		rs = stmt.executeQuery(SQL.toString());
 
- 		while (rs.next()) {
-			map = new HashMap<String,String>();
-			map.put("attendance_id",rs.getString("attendance_id"));
-			map.put("employee_name",rs.getString("employee_name"));
-			list.add(map);
+ 		if (rs.next()) {
+			join_check_result = rs.getString("employee_name");
+			attendance_id = rs.getString("attendance_id");
 		}
 
 	} catch (ClassNotFoundException e) {
@@ -135,19 +144,24 @@
 							>
 								従業員一覧
 							</a>
-							<a
-								href="/SD/pages/employee_regist.html"
-								class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
-							>
-								従業員登録
-							</a>
-            	<hr class="text-gray-300">
-							<a
-								href="/SD/pages/signin.html"
-								class="py-2 px-6 hover:bg-gray-200 font-bold rounded-full"
-							>
-								ログアウト
-							</a>
+
+							<% if (employee_type.equals("1") || employee_type.equals("2")) { %>
+								<a
+									href="/SD/pages/employee_regist.jsp"
+									class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+								>
+									従業員登録
+								</a>
+							<% } %>
+
+              <hr class="text-gray-300">
+              
+              <a
+                href="/SD/pages/signout.jsp"
+                class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+              >
+                サインアウト
+              </a>
 						</div>
 					</nav>
 
@@ -165,35 +179,44 @@
 							>
 								退勤登録
 							</h1>
+							
+							<% if (join_check_result.equals("")) { %>
+								<p class="pt-4 text-center text-lg text-red-400">出勤していません</p>
+							<% } else { %>
+								<label
+									for="employee_id"
+									class="pl-1 text-gray-600"
+									>従業員氏名</label
+								>
+								<input 
+									type="text"
+									value="<%= join_check_result %>"
+									disabled
+									class="input input-info input-bordered w-full"
+								/>
 
-							<label
-								for="employee_id"
-								class="pl-1 text-gray-600"
-								>従業員氏名</label
-							>
-							<select id="employee_id" name="ATTENDANCE_ID" class="select select-bordered select-info w-full">
-								<option selected disabled>選択してください</option>
-								<% for (int i = 0; i < list.size(); i++) { %>
-									<option value="<%= list.get(i).get("attendance_id") %>">
-										<%= list.get(i).get("employee_name") %>
-									</option>
-								<% } %>
-							</select>
+								<input 
+									type="hidden"
+									name="ATTENDANCE_ID"
+									value="<%= attendance_id %>"
+								/>
 
-							<button class="
-									w-full
-									mx-auto
-									text-white
-									bg-blue-500
-									border-0
-									py-3
-									px-8
-									mt-2
-									focus:outline-none
-									hover:bg-blue-600
-									text-lg
-									rounded-full"
-								>送信</button>
+								<button class="
+										w-full
+										mx-auto
+										text-white
+										bg-blue-500
+										border-0
+										py-3
+										px-8
+										mt-2
+										focus:outline-none
+										hover:bg-blue-600
+										text-lg
+										rounded-full"
+									>退勤</button>
+							<% } %>
+
 						</div>
 					</main>
 				</div>

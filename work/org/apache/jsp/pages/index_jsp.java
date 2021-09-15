@@ -52,13 +52,25 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\r');
       out.write('\n');
- response.setContentType("text/html; charset=UTF-8"); 
+
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+	
+  String employee_id = (String)session.getAttribute("employee_id");
+  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  String employee_type = (String)session.getAttribute("employee_type");
+  String employee_name = (String)session.getAttribute("employee_name");
+  
+  ServletContext sc = getServletContext();
+  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+
+
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html lang=\"en\">\r\n");
       out.write("  <head>\r\n");
-      out.write("    <meta charset=\"UTF-8\" />\r\n");
+      out.write("\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
       out.write("    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\r\n");
       out.write("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\r\n");
       out.write("    <link\r\n");
@@ -120,18 +132,27 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            >\r\n");
       out.write("              従業員一覧\r\n");
       out.write("            </a>\r\n");
+      out.write("\r\n");
+      out.write("            ");
+ if (employee_type.equals("1") || employee_type.equals("2")) { 
+      out.write("\r\n");
+      out.write("              <a\r\n");
+      out.write("                href=\"/SD/pages/employee_regist.jsp\"\r\n");
+      out.write("                class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              >\r\n");
+      out.write("                従業員登録\r\n");
+      out.write("              </a>\r\n");
+      out.write("            ");
+ } 
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("            <hr class=\"text-gray-300\">\r\n");
+      out.write("            \r\n");
       out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/employee_regist.html\"\r\n");
+      out.write("              href=\"/SD/pages/signout.jsp\"\r\n");
       out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
-      out.write("              従業員登録\r\n");
-      out.write("            </a>\r\n");
-      out.write("            <hr class=\"text-gray-300\">\r\n");
-      out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/signin.html\"\r\n");
-      out.write("              class=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
-      out.write("            >\r\n");
-      out.write("              ログアウト\r\n");
+      out.write("              サインアウト\r\n");
       out.write("            </a>\r\n");
       out.write("          </div>\r\n");
       out.write("        </nav>\r\n");
