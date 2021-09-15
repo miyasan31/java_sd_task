@@ -164,10 +164,11 @@ public final class employee_005flist_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("  <body>\r\n");
       out.write("    <div class=\"flex flex-col w-full h-screen\">\r\n");
       out.write("      <header class=\"w-full bg-blue-400 py-4 border-b border-gray-200\">\r\n");
-      out.write("        <h1 class=\"text-center text-4xl font-bold text-white\">\r\n");
+      out.write("        <h1 class=\"text-2xl pl-8 font-bold text-white\">\r\n");
       out.write("          カラオケシステム\r\n");
       out.write("        </h1>\r\n");
       out.write("      </header>\r\n");
+      out.write("\t\t\t\r\n");
       out.write("      \r\n");
       out.write("      <div class=\"flex flex-1 w-full bg-gray-100\">\r\n");
       out.write("        <nav class=\"w-1/6 min-w-max border-r border-gray-200\">\r\n");

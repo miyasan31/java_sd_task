@@ -24,10 +24,11 @@
   <body>
     <div class="flex flex-col w-full h-screen">
       <header class="w-full bg-blue-400 py-4 border-b border-gray-200">
-        <h1 class="text-center text-4xl font-bold text-white">
+        <h1 class="text-2xl pl-8 font-bold text-white">
           カラオケシステム
         </h1>
       </header>
+
       <div class="flex flex-1 w-full bg-gray-100">
         <nav class="w-1/6 min-w-max border-r border-gray-200">
           <div class="flex flex-col gap-2 p-4">
@@ -83,7 +84,7 @@
         </nav>
 
         <main class="flex flex-1 flex-col items-center overflow-scroll">
-					<div class="flex flex-col gap-2 w-2/3 max-w-sm">
+					<div class="flex flex-col gap-2 w-2/3 max-w-lg">
 						<h1
 							class="
 								pt-8

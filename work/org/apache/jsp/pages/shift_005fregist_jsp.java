@@ -153,11 +153,12 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write(" <body>\r\n");
       out.write("\t<form action=\"/SD/servlet/shift_regist\" method=\"POST\">\r\n");
       out.write("    <div class=\"flex flex-col w-full h-screen\">\r\n");
-      out.write("      <header class=\"w-full min-w-max  bg-blue-400 py-4 border-b border-gray-200\">\r\n");
-      out.write("        <h1 class=\"text-center text-4xl font-bold text-white\">\r\n");
+      out.write("      <header class=\"w-full bg-blue-400 py-4 border-b border-gray-200\">\r\n");
+      out.write("        <h1 class=\"text-2xl pl-8 font-bold text-white\">\r\n");
       out.write("          カラオケシステム\r\n");
       out.write("        </h1>\r\n");
       out.write("      </header>\r\n");
+      out.write("\t\t\t\r\n");
       out.write("      <div class=\"flex flex-1 w-full bg-gray-100\">\r\n");
       out.write("        <nav class=\"w-1/6 min-w-max border-r border-gray-200\">\r\n");
       out.write("          <div class=\"flex flex-col gap-2 p-4\">\r\n");
@@ -213,7 +214,7 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("        </nav>\r\n");
       out.write("\r\n");
       out.write("        <main class=\"flex flex-1 flex-col items-center overflow-scroll\">\r\n");
-      out.write("\t\t\t\t\t<div class=\"flex flex-col gap-2 w-2/3 max-w-sm\">\r\n");
+      out.write("\t\t\t\t\t<div class=\"flex flex-col gap-2 w-2/3 max-w-lg\">\r\n");
       out.write("\t\t\t\t\t\t<h1\r\n");
       out.write("\t\t\t\t\t\t\tclass=\"\r\n");
       out.write("\t\t\t\t\t\t\t\tpt-8\r\n");
