@@ -201,15 +201,15 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            <hr class=\"text-gray-300\">\r\n");
       out.write("            <a\r\n");
       out.write("              href=\"/SD/pages/signin.html\"\r\n");
-      out.write("              class=\"py-2 px-6 hover:bg-gray-100 font-bold rounded-full\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
       out.write("              ログアウト\r\n");
       out.write("            </a>\r\n");
       out.write("          </div>\r\n");
       out.write("        </nav>\r\n");
       out.write("\r\n");
-      out.write("        <main class=\"flex flex-1 flex-col items-center pb-40 overflow-scroll\">\r\n");
-      out.write("          <div class=\"flex-1 overflow-auto w-full\">\r\n");
+      out.write("        <main class=\"flex flex-1 flex-col items-center overflow-y-scroll\">\r\n");
+      out.write("          <div class=\"flex-1 overflow-x-auto w-full pb-40\">\r\n");
       out.write("            <table class=\"table w-full\">\r\n");
       out.write("              <thead>\r\n");
       out.write("                <tr>\r\n");

@@ -54,7 +54,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write('\n');
 
   response.setContentType("text/html; charset=UTF-8");
-  String error =	request.getAttribute("error").toString(); 
+  String error = request.getAttribute("error").toString(); 
 
       out.write("\r\n");
       out.write("\r\n");
@@ -96,7 +96,6 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("          >\r\n");
       out.write("            サインイン\r\n");
       out.write("          </h1>\r\n");
-      out.write("\r\n");
       out.write("          \r\n");
       out.write("          <label class=\"pl-2 text-lg text-gray-600 text-red-400\">\r\n");
       out.write("            メールアドレスまたはパスワードが間違っています\r\n");

@@ -197,7 +197,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            \t<hr class=\"text-gray-300\">\r\n");
       out.write("\t\t\t\t\t\t\t<a\r\n");
       out.write("\t\t\t\t\t\t\t\thref=\"/SD/pages/signin.html\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-gray-100 font-bold rounded-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-gray-200 font-bold rounded-full\"\r\n");
       out.write("\t\t\t\t\t\t\t>\r\n");
       out.write("\t\t\t\t\t\t\t\tログアウト\r\n");
       out.write("\t\t\t\t\t\t\t</a>\r\n");
