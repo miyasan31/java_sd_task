@@ -89,16 +89,16 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
 
  		SQL = new StringBuffer();
 
- 		SQL.append("SELECT working_shift_id, employee_name ");
- 		SQL.append("FROM working_shift, employee ");
- 		SQL.append("WHERE working_shift.employee_id = employee.employee_id ");
- 		SQL.append("AND working_shift_leaving IS NULL");
+ 		SQL.append("SELECT attendance_id, employee_name ");
+ 		SQL.append("FROM attendance, employee ");
+ 		SQL.append("WHERE attendance.employee_id = employee.employee_id ");
+ 		SQL.append("AND attendance_leaving IS NULL");
 
  		rs = stmt.executeQuery(SQL.toString());
 
  		while (rs.next()){
  						map = new HashMap<String,String>();
-						map.put("working_shift_id",rs.getString("working_shift_id"));
+						map.put("attendance_id",rs.getString("attendance_id"));
 						map.put("employee_name",rs.getString("employee_name"));
  						list.add(map);
  				}
@@ -154,7 +154,7 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\t\trel=\"stylesheet\"\r\n");
       out.write("\t\ttype=\"text/css\"\r\n");
       out.write("\t/>\r\n");
-      out.write("\t<title>出勤登録</title>\r\n");
+      out.write("\t<title>退勤登録</title>\r\n");
       out.write(" </head>\r\n");
       out.write(" <body>\r\n");
       out.write("\t<form action=\"/SD/servlet/shift_leaving\" method=\"POST\">\r\n");
@@ -186,7 +186,25 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("              退勤登録\r\n");
       out.write("            </a>\r\n");
       out.write("            <a\r\n");
-      out.write("              href=\"/SD/pages/employee_insert.html\"\r\n");
+      out.write("              href=\"/SD/pages/shift_list.jsp\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("            >\r\n");
+      out.write("              シフト一覧\r\n");
+      out.write("            </a>\r\n");
+      out.write("            <a\r\n");
+      out.write("              href=\"/SD/pages/shift_regist.jsp\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("            >\r\n");
+      out.write("              シフト登録\r\n");
+      out.write("            </a>\r\n");
+      out.write("\t\t\t\t\t\t<a\r\n");
+      out.write("\t\t\t\t\t\t\thref=\"/SD/pages/employee_list.jsp\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t\t従業員一覧\r\n");
+      out.write("\t\t\t\t\t\t</a>\r\n");
+      out.write("            <a\r\n");
+      out.write("              href=\"/SD/pages/employee_regist.html\"\r\n");
       out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
       out.write("              従業員登録\r\n");
@@ -201,7 +219,7 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("        </nav>\r\n");
       out.write("\r\n");
       out.write("        <main class=\"w-4/5 flex flex-col justify-center items-center\">\r\n");
-      out.write("\t\t\t\t\t<div class=\"flex flex-col gap-4 w-96\">\r\n");
+      out.write("\t\t\t\t\t<div class=\"flex flex-col gap-2 w-96\">\r\n");
       out.write("\t\t\t\t\t\t<h1\r\n");
       out.write("\t\t\t\t\t\t\tclass=\"\r\n");
       out.write("\t\t\t\t\t\t\t\ttext-center\r\n");
@@ -215,13 +233,18 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("\t\t\t\t\t\t\t退勤登録\r\n");
       out.write("\t\t\t\t\t\t</h1>\r\n");
       out.write("\r\n");
-      out.write("\t\t\t\t\t\t<select name=\"WORKING_SHIFT_ID\" class=\"select select-bordered select-info w-full\">\r\n");
+      out.write("\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"shift_join_year\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t>従業員氏名</label\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t<select name=\"ATTENDANCE_ID\" class=\"select select-bordered select-info w-full\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<option selected disabled>選択してください</option>\r\n");
       out.write("\t\t\t\t\t\t\t\t");
  for (int i = 0; i < list.size(); i++) { 
       out.write("\r\n");
       out.write("\t\t\t\t\t\t\t\t\t\t<option value=\"");
-      out.print( list.get(i).get("working_shift_id") );
+      out.print( list.get(i).get("attendance_id") );
       out.write("\">\r\n");
       out.write("\t\t\t\t\t\t\t\t\t\t\t");
       out.print( list.get(i).get("employee_name") );

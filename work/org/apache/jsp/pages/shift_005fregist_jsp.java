@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -94,45 +94,43 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
  		rs = stmt.executeQuery(SQL.toString());
 
  		while (rs.next()){
- 						 map = new HashMap<String,String>();
-							map.put("employee_id",rs.getString("employee_id"));
-							map.put("employee_name",rs.getString("employee_name"));
- 						 list.add(map);
- 				}
+				map = new HashMap<String,String>();
+				map.put("employee_id",rs.getString("employee_id"));
+				map.put("employee_name",rs.getString("employee_name"));
+				list.add(map);
+			}
  		}
 
  		catch(ClassNotFoundException e){
- 					ERMSG = new StringBuffer();
- 					ERMSG.append(e.getMessage());
+			ERMSG = new StringBuffer();
+			ERMSG.append(e.getMessage());
  		}
  		catch(SQLException e){
- 					ERMSG = new StringBuffer();
- 					ERMSG.append(e.getMessage());
+			ERMSG = new StringBuffer();
+			ERMSG.append(e.getMessage());
  		}
  		catch(Exception e){
- 					ERMSG = new StringBuffer();
- 					ERMSG.append(e.getMessage());
+			ERMSG = new StringBuffer();
+			ERMSG.append(e.getMessage());
  		}
 
  		finally{
-
- 		    try{
- 		        if(rs != null){
- 		                     rs.close();
- 		        }
- 		        if(stmt != null){
- 		        			 stmt.close();
- 		        }
- 		        if(con != null){
- 		        			 con.close();
- 		        }
- 		    }
-
- 		    	catch(SQLException e){
- 		    	ERMSG = new StringBuffer();
- 		    	ERMSG.append(e.getMessage());
- 		 		}
- 		 	}
+			try{
+				if(rs != null){
+					rs.close();
+				}
+				if(stmt != null){
+					stmt.close();
+				}
+				if(con != null){
+					con.close();
+				}
+			}
+			catch(SQLException e){
+				ERMSG = new StringBuffer();
+				ERMSG.append(e.getMessage());
+			}
+		}
  
       out.write("\r\n");
       out.write("\r\n");
@@ -150,10 +148,10 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("\t\trel=\"stylesheet\"\r\n");
       out.write("\t\ttype=\"text/css\"\r\n");
       out.write("\t/>\r\n");
-      out.write("\t<title>出勤登録</title>\r\n");
+      out.write("\t<title>シフト登録</title>\r\n");
       out.write(" </head>\r\n");
       out.write(" <body>\r\n");
-      out.write("\t<form action=\"/SD/servlet/shift_join\" method=\"POST\">\r\n");
+      out.write("\t<form action=\"/SD/servlet/shift_regist\" method=\"POST\">\r\n");
       out.write("    <div class=\"flex flex-col w-full h-screen\">\r\n");
       out.write("      <header class=\"w-full bg-blue-400 py-4 border-b border-gray-200\">\r\n");
       out.write("        <h1 class=\"text-center text-4xl font-bold text-white\">\r\n");
@@ -171,7 +169,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            </a>\r\n");
       out.write("            <a\r\n");
       out.write("              href=\"/SD/pages/shift_join.jsp\"\r\n");
-      out.write("              class=\"py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
       out.write("              出勤登録\r\n");
       out.write("            </a>\r\n");
@@ -189,7 +187,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("            </a>\r\n");
       out.write("            <a\r\n");
       out.write("              href=\"/SD/pages/shift_regist.jsp\"\r\n");
-      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("              class=\"py-2 px-6 bg-blue-200 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
       out.write("              シフト登録\r\n");
       out.write("            </a>\r\n");
@@ -226,7 +224,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("\t\t\t\t\t\t\t\ttext-gray-800\r\n");
       out.write("\t\t\t\t\t\t\t\"\r\n");
       out.write("\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t出勤登録\r\n");
+      out.write("\t\t\t\t\t\t\tシフト登録\r\n");
       out.write("\t\t\t\t\t\t</h1>\r\n");
       out.write("\r\n");
       out.write("\t\t\t\t\t\t<label\r\n");
@@ -250,6 +248,101 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
  } 
       out.write("\r\n");
       out.write("\t\t\t\t\t\t</select>\r\n");
+      out.write("\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"shift_join_ymd\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t>出勤予定日</label\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\ttype=\"date\"\r\n");
+      out.write("\t\t\t\t\t\t\tid=\"shift_join_ymd\"\r\n");
+      out.write("\t\t\t\t\t\t\tname=\"SHIFT_JOIN_YMD\"\r\n");
+      out.write("\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t/>\r\n");
+      out.write("\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"shift_join_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t>出勤予定時刻</label\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t<div class=\"flex items-center\">\r\n");
+      out.write("\t\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"number\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tid=\"shift_join_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tname=\"SHIFT_JOIN_HOUR\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
+      out.write("\t\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\t\tfor=\"shift_join_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"px-2 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>時</label\r\n");
+      out.write("\t\t\t\t\t\t\t>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"number\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tid=\"shift_join_minute\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tname=\"SHIFT_JOIN_MINUTE\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
+      out.write("\t\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\t\tfor=\"shift_join_minute\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"px-2 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>分</label\r\n");
+      out.write("\t\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t</div>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"shift_leaving_ymd\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t>退勤予定日</label\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\ttype=\"date\"\r\n");
+      out.write("\t\t\t\t\t\t\tid=\"shift_leaving_ymd\"\r\n");
+      out.write("\t\t\t\t\t\t\tname=\"SHIFT_LEAVING_YMD\"\r\n");
+      out.write("\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t/>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\r\n");
+      out.write("\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"shift_leaving_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t>退勤予定時刻</label\r\n");
+      out.write("\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t<div class=\"flex items-center\">\r\n");
+      out.write("\t\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"number\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tid=\"shift_leaving_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tname=\"SHIFT_LEAVING_HOUR\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
+      out.write("\t\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\t\tfor=\"shift_leaving_hour\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"px-2 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>時</label\r\n");
+      out.write("\t\t\t\t\t\t\t>\r\n");
+      out.write("\r\n");
+      out.write("\t\t\t\t\t\t\t<input\r\n");
+      out.write("\t\t\t\t\t\t\t\ttype=\"number\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tid=\"shift_leaving_minute\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tname=\"SHIFT_LEAVING_MINUTE\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tvalue=\"\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
+      out.write("\t\t\t\t\t\t\t/>\r\n");
+      out.write("\t\t\t\t\t\t\t<label\r\n");
+      out.write("\t\t\t\t\t\t\t\tfor=\"shift_leaving_minute\"\r\n");
+      out.write("\t\t\t\t\t\t\t\tclass=\"px-2 text-gray-600\"\r\n");
+      out.write("\t\t\t\t\t\t\t\t>分</label\r\n");
+      out.write("\t\t\t\t\t\t\t>\r\n");
+      out.write("\t\t\t\t\t\t</div>\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\t\t\t\t\t\t<button class=\"\r\n");
       out.write("\t\t\t\t\t\t\t\tw-full\r\n");

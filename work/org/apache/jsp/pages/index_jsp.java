@@ -104,6 +104,18 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("              退勤登録\r\n");
       out.write("            </a>\r\n");
       out.write("            <a\r\n");
+      out.write("              href=\"/SD/pages/shift_list.jsp\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("            >\r\n");
+      out.write("              シフト一覧\r\n");
+      out.write("            </a>\r\n");
+      out.write("            <a\r\n");
+      out.write("              href=\"/SD/pages/shift_regist.jsp\"\r\n");
+      out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
+      out.write("            >\r\n");
+      out.write("              シフト登録\r\n");
+      out.write("            </a>\r\n");
+      out.write("            <a\r\n");
       out.write("              href=\"/SD/pages/employee_insert.html\"\r\n");
       out.write("              class=\"py-2 px-6 hover:bg-blue-100 font-bold rounded-full\"\r\n");
       out.write("            >\r\n");
