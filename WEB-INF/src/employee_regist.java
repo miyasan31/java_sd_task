@@ -4,11 +4,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 public class employee_regist extends HttpServlet {
-	
-	public void doPost (
-		HttpServletRequest req,
-		HttpServletResponse res )
-		throws ServletException , IOException {
+	public void doPost (HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 
 		final String URL = "jdbc:mysql://localhost/sd_kadai?useUnicode=true&characterEncoding=UTF-8";
 		final String USER = "miyasan";
@@ -17,10 +15,7 @@ public class employee_regist extends HttpServlet {
 
 		Connection con = null;
 		Statement stmt = null;
-
 		PrintWriter out;
-		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html;charset=UTF-8");
 		out = res.getWriter();
 
 		String employee_name = req.getParameter("EMPLOYEE_NAME");
@@ -45,12 +40,15 @@ public class employee_regist extends HttpServlet {
 			stmt = con.createStatement();
 
 			StringBuffer query = new StringBuffer();
-			query.append("select * from employee where employee_email ='");
+
+			query.append("SELECT * FROM employee WHERE employee_email ='");
 			query.append(employee_email);
 			query.append("'");
+
 			ResultSet rs = stmt.executeQuery(query.toString());
 
 			StringBuffer sb = new StringBuffer();
+
 			sb.append("<html>");
 				sb.append("<head>");
 					sb.append("<title>従業員登録</title>");
@@ -61,11 +59,13 @@ public class employee_regist extends HttpServlet {
 					sb.append("<div class='h-screen w-full'>");
 						sb.append("<div class='text-2xl text-center bg-primary py-5 font-bold text-white'>従業員登録</div>");
 						sb.append("<div class='px-5'>");
+
 							if (rs.next()) {
 								sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>従業員登録</div>");
 								sb.append("<div class='text-center'>" + employee_email + "はすでに登録されています</div>");
 							} else {
 								query = new StringBuffer();
+
 								query.append("INSERT INTO employee");
 								query.append("(employee_name, employee_name_sub, employee_birthday, employee_gender, employee_zipcode, employee_address, ");
 								query.append("employee_phone, employee_email, employee_password, employee_type, company_join) ");
@@ -92,9 +92,12 @@ public class employee_regist extends HttpServlet {
 								query.append("','");
 								query.append(company_join_year + "-" + company_join_month + "-" + company_join_day);
 								query.append("')");
+
 								stmt.executeUpdate(query.toString());
+
 								sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>従業員登録完了</div>");
 							}
+
 							sb.append("<div class='flex justify-center pt-5'>");
 								sb.append("<a href='/SD/pages/employee_regist.html' class='btn btn-link'>登録に戻る</a>");
 								sb.append("<a href='/SD/pages/index.jsp' class='btn btn-link'>ホームに戻る</a>");
@@ -103,11 +106,11 @@ public class employee_regist extends HttpServlet {
 					sb.append("</div>");
 				sb.append("</body>");
 			sb.append("</html>");
+
 			out.println(sb.toString());
 			stmt.close();
 			con.close();
-		}
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			out.println(" ---- SQL Exception ----");
 			out.println(" ---- Error Message ----");
 			while (ex != null) {

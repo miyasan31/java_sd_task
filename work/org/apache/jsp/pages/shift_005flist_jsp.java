@@ -57,30 +57,26 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
-      out.write(" ");
 
  	request.setCharacterEncoding("UTF-8");
  	response.setCharacterEncoding("UTF-8");
-
- 	Connection con = null;
- 	Statement stmt = null;
- 	StringBuffer SQL = null;
- 	ResultSet rs = null;
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";
  	String URL = "jdbc:mysql://localhost/sd_kadai";
  	String DRIVER = "com.mysql.jdbc.Driver";
 
+ 	Connection con = null;
+ 	Statement stmt = null;
+ 	StringBuffer SQL = null;
+ 	ResultSet rs = null;
  	StringBuffer ERMSG = null;
-
  	HashMap<String,String> map = null;
-
  	ArrayList<HashMap> list = null;
+   
  	list = new ArrayList<HashMap>();
 
- 	try{
+ 	try {
  		Class.forName(DRIVER).newInstance();
 
  		con = DriverManager.getConnection(URL,USER,PASSWORD);
@@ -96,47 +92,41 @@ public final class shift_005flist_jsp extends org.apache.jasper.runtime.HttpJspB
      
  		rs = stmt.executeQuery(SQL.toString());
 
- 		while (rs.next()){
-				map = new HashMap<String,String>();
-				map.put("shift_id",rs.getString("shift_id"));
-				map.put("employee_name",rs.getString("employee_name"));
-				map.put("shift_join_schedule",rs.getString("shift_join_schedule"));
-				map.put("shift_leaving_schedule",rs.getString("shift_leaving_schedule"));
-				list.add(map);
-			}
- 		}
-
- 		catch(ClassNotFoundException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(SQLException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(Exception e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
-
- 		finally{
-			try{
-				if(rs != null){
-					rs.close();
-				}
-				if(stmt != null){
-					stmt.close();
-				}
-				if(con != null){
-					con.close();
-				}
-			}
-			catch(SQLException e){
-				ERMSG = new StringBuffer();
-				ERMSG.append(e.getMessage());
-			}
+ 		while (rs.next()) {
+      map = new HashMap<String,String>();
+      map.put("shift_id",rs.getString("shift_id"));
+      map.put("employee_name",rs.getString("employee_name"));
+      map.put("shift_join_schedule",rs.getString("shift_join_schedule"));
+      map.put("shift_leaving_schedule",rs.getString("shift_leaving_schedule"));
+      list.add(map);
 		}
- 
+
+	} catch (ClassNotFoundException e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} catch (SQLException e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} catch (Exception e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} finally {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			ERMSG = new StringBuffer();
+			ERMSG.append(e.getMessage());
+		}
+	}
+
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n");

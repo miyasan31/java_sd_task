@@ -52,9 +52,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write('\r');
       out.write('\n');
-
-  response.setContentType("text/html; charset=UTF-8");
-
+ response.setContentType("text/html; charset=UTF-8"); 
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");

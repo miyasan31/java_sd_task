@@ -6,11 +6,9 @@ import java.util.Date;
 import java.text.*;
 
 public class shift_join extends HttpServlet {
-	
-	public void doPost (
-		HttpServletRequest req,
-		HttpServletResponse res )
-		throws ServletException , IOException {
+	public void doPost (HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 
 		final String URL = "jdbc:mysql://localhost/sd_kadai?useUnicode=true&characterEncoding=UTF-8";
 		final String USER = "miyasan";
@@ -19,10 +17,7 @@ public class shift_join extends HttpServlet {
 
 		Connection con = null;
 		Statement stmt = null;
-
 		PrintWriter out;
-		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html;charset=UTF-8");
 		out = res.getWriter();
 
 		StringBuffer query = new StringBuffer();
@@ -32,12 +27,13 @@ public class shift_join extends HttpServlet {
 		SimpleDateFormat date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String join_date_time = date_time.format(new Date());
 
-		try {;
+		try {
 			Class.forName(DRIVER);
 			con = DriverManager.getConnection(URL,USER,PASSWORD);
 			stmt = con.createStatement();
 
 			StringBuffer sb = new StringBuffer();
+
 			sb.append("<html>");
 				sb.append("<head>");
 					sb.append("<title>出勤登録</title>");
@@ -50,6 +46,7 @@ public class shift_join extends HttpServlet {
 						sb.append("<div class='px-5'>");
 
 							query = new StringBuffer();
+
 							query.append("INSERT INTO attendance ");
 							query.append("(employee_id, attendance_join) ");
 							query.append("VALUES('");
@@ -57,10 +54,10 @@ public class shift_join extends HttpServlet {
 							query.append("','");
 							query.append(join_date_time);
 							query.append("')");
+
 							stmt.executeUpdate(query.toString());
 
 							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>出勤登録完了</div>");
-
 							sb.append("<div class='flex justify-center pt-5'>");
 								sb.append("<a href='/SD/pages/shift_join.jsp' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
@@ -68,11 +65,11 @@ public class shift_join extends HttpServlet {
 					sb.append("</div>");
 				sb.append("</body>");
 			sb.append("</html>");
+
 			out.println(sb.toString());
 			stmt.close();
 			con.close();
-		}
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			out.println(" ---- SQL Exception ----");
 			out.println(" ---- Error Message ----");
 			while (ex != null) {

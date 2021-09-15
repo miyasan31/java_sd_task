@@ -12,12 +12,9 @@ import javax.servlet.http.*;
 
 
 public class signin extends HttpServlet {
-	public void doPost (
-			HttpServletRequest req,
-			HttpServletResponse res )
-		throws ServletException , IOException {
-			req.setCharacterEncoding("UTF-8");
-			res.setContentType("text/html; charset=UTF-8");
+	public void doPost (HttpServletRequest req, HttpServletResponse res ) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8");
 			
 		final String URL = "jdbc:mysql://localhost/sd_kadai?useUnicode=true&characterEncoding=UTF-8";
 		final String USER = "miyasan";
@@ -27,8 +24,6 @@ public class signin extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		PrintWriter out;
-		req.setCharacterEncoding("UTF-8");
-		res.setContentType("text/html;charset=UTF-8");
 		out = res.getWriter();
 		
 		String employee_email = req.getParameter("EMPLOYEE_EMAIL");
@@ -40,7 +35,8 @@ public class signin extends HttpServlet {
 			stmt = con.createStatement();
 
 			StringBuffer query = new StringBuffer();
-			query.append("select * from employee where ");
+
+			query.append("SELECT * FROM employee WHERE ");
 			query.append("employee_email = '");
 			query.append(employee_email);
 			query.append("' ");
@@ -63,8 +59,7 @@ public class signin extends HttpServlet {
 				ServletContext sc = getServletContext();
         sc.getRequestDispatcher("/pages/signin.jsp").forward(req, res);
       }
-			
-			
+
 		} catch (SQLException ex) {
 			out.println(" ---- SQL Exception ----");
 			out.println(" ---- Error Message ----");

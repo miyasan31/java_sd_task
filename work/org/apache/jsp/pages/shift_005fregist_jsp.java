@@ -57,30 +57,26 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
-      out.write(" ");
 
  	request.setCharacterEncoding("UTF-8");
  	response.setCharacterEncoding("UTF-8");
-
- 	Connection con = null;
- 	Statement stmt = null;
- 	StringBuffer SQL = null;
- 	ResultSet rs = null;
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";
  	String URL = "jdbc:mysql://localhost/sd_kadai";
  	String DRIVER = "com.mysql.jdbc.Driver";
 
+ 	Connection con = null;
+ 	Statement stmt = null;
+ 	StringBuffer SQL = null;
+ 	ResultSet rs = null;
  	StringBuffer ERMSG = null;
-
  	HashMap<String,String> map = null;
-
  	ArrayList<HashMap> list = null;
+	 
  	list = new ArrayList<HashMap>();
 
- 	try{
+ 	try {
  		Class.forName(DRIVER).newInstance();
 
  		con = DriverManager.getConnection(URL,USER,PASSWORD);
@@ -93,45 +89,39 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
 
  		rs = stmt.executeQuery(SQL.toString());
 
- 		while (rs.next()){
-				map = new HashMap<String,String>();
-				map.put("employee_id",rs.getString("employee_id"));
-				map.put("employee_name",rs.getString("employee_name"));
-				list.add(map);
-			}
- 		}
-
- 		catch(ClassNotFoundException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(SQLException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(Exception e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
-
- 		finally{
-			try{
-				if(rs != null){
-					rs.close();
-				}
-				if(stmt != null){
-					stmt.close();
-				}
-				if(con != null){
-					con.close();
-				}
-			}
-			catch(SQLException e){
-				ERMSG = new StringBuffer();
-				ERMSG.append(e.getMessage());
-			}
+ 		while (rs.next()) {
+			map = new HashMap<String,String>();
+			map.put("employee_id",rs.getString("employee_id"));
+			map.put("employee_name",rs.getString("employee_name"));
+			list.add(map);
 		}
- 
+
+	} catch (ClassNotFoundException e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} catch (SQLException e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} catch (Exception e) {
+		ERMSG = new StringBuffer();
+		ERMSG.append(e.getMessage());
+	} finally {
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (stmt != null) {
+				stmt.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+		} catch (SQLException e) {
+			ERMSG = new StringBuffer();
+			ERMSG.append(e.getMessage());
+		}
+	}
+
       out.write("\r\n");
       out.write("\r\n");
       out.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n");
@@ -229,11 +219,11 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\t\t\t\t\t\t</h1>\r\n");
       out.write("\r\n");
       out.write("\t\t\t\t\t\t<label\r\n");
-      out.write("\t\t\t\t\t\t\tfor=\"shift_join_year\"\r\n");
+      out.write("\t\t\t\t\t\t\tfor=\"employee_id\"\r\n");
       out.write("\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
       out.write("\t\t\t\t\t\t\t>従業員氏名</label\r\n");
       out.write("\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t<select name=\"EMPLOYEE_ID\" class=\"select select-bordered select-info w-full\">\r\n");
+      out.write("\t\t\t\t\t\t<select id=\"employee_id\" name=\"EMPLOYEE_ID\" class=\"select select-bordered select-info w-full\">\r\n");
       out.write("\t\t\t\t\t\t\t\t<option selected disabled>選択してください</option>\r\n");
       out.write("\t\t\t\t\t\t\t\t");
  for (int i = 0; i < list.size(); i++) { 

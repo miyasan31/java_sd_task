@@ -2,91 +2,83 @@
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.HashMap" %>
 <%@ page import = "java.util.ArrayList" %>
+<%
+  request.setCharacterEncoding("UTF-8");
+  response.setCharacterEncoding("UTF-8");
+  
+  String USER = "miyasan";
+  String PASSWORD = "0301";
+  String URL = "jdbc:mysql://localhost/sd_kadai";
+  String DRIVER = "com.mysql.jdbc.Driver";
 
- <%
- 	request.setCharacterEncoding("UTF-8");
- 	response.setCharacterEncoding("UTF-8");
+  Connection con = null;
+  Statement stmt = null;
+  StringBuffer SQL = null;
+  ResultSet rs = null;
 
- 	Connection con = null;
- 	Statement stmt = null;
- 	StringBuffer SQL = null;
- 	ResultSet rs = null;
+  StringBuffer ERMSG = null;
+  HashMap<String,String> map = null;
+  ArrayList<HashMap> list = null;
 
- 	String USER = "miyasan";
- 	String PASSWORD = "0301";
- 	String URL = "jdbc:mysql://localhost/sd_kadai";
- 	String DRIVER = "com.mysql.jdbc.Driver";
+  list = new ArrayList<HashMap>();
 
- 	StringBuffer ERMSG = null;
+  try {
+    Class.forName(DRIVER).newInstance();
 
- 	HashMap<String,String> map = null;
+    con = DriverManager.getConnection(URL,USER,PASSWORD);
 
- 	ArrayList<HashMap> list = null;
- 	list = new ArrayList<HashMap>();
+    stmt = con.createStatement();
 
- 	try{
- 		Class.forName(DRIVER).newInstance();
+    SQL = new StringBuffer();
 
- 		con = DriverManager.getConnection(URL,USER,PASSWORD);
+    SQL.append("SELECT * ");
+    SQL.append("FROM employee ");
+    SQL.append("ORDER BY employee_type");
+      
+    rs = stmt.executeQuery(SQL.toString());
 
- 		stmt = con.createStatement();
+    while (rs.next()) {
+      map = new HashMap<String,String>();
+      map.put("employee_id",rs.getString("employee_id"));
+      map.put("employee_name",rs.getString("employee_name"));
+      map.put("employee_name_sub",rs.getString("employee_name_sub"));
+      map.put("employee_birthday",rs.getString("employee_birthday"));
+      map.put("employee_gender",rs.getString("employee_gender"));
+      map.put("employee_email",rs.getString("employee_email"));
+      map.put("employee_phone",rs.getString("employee_phone"));
+      map.put("employee_zipcode",rs.getString("employee_zipcode"));
+      map.put("employee_address",rs.getString("employee_address"));
+      map.put("employee_type",rs.getString("employee_type"));
+      map.put("company_join",rs.getString("company_join"));
+      list.add(map);
+    }
 
- 		SQL = new StringBuffer();
-
- 		SQL.append("SELECT * ");
- 		SQL.append("FROM employee ");
- 		SQL.append("ORDER BY employee_type");
-     
- 		rs = stmt.executeQuery(SQL.toString());
-
- 		while (rs.next()){
-				map = new HashMap<String,String>();
-				map.put("employee_id",rs.getString("employee_id"));
-				map.put("employee_name",rs.getString("employee_name"));
-				map.put("employee_name_sub",rs.getString("employee_name_sub"));
-				map.put("employee_birthday",rs.getString("employee_birthday"));
-				map.put("employee_gender",rs.getString("employee_gender"));
-				map.put("employee_email",rs.getString("employee_email"));
-				map.put("employee_phone",rs.getString("employee_phone"));
-				map.put("employee_zipcode",rs.getString("employee_zipcode"));
-				map.put("employee_address",rs.getString("employee_address"));
-				map.put("employee_type",rs.getString("employee_type"));
-				map.put("company_join",rs.getString("company_join"));
-				list.add(map);
-			}
- 		}
-
- 		catch(ClassNotFoundException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(SQLException e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
- 		catch(Exception e){
-			ERMSG = new StringBuffer();
-			ERMSG.append(e.getMessage());
- 		}
-
- 		finally{
-			try{
-				if(rs != null){
-					rs.close();
-				}
-				if(stmt != null){
-					stmt.close();
-				}
-				if(con != null){
-					con.close();
-				}
-			}
-			catch(SQLException e){
-				ERMSG = new StringBuffer();
-				ERMSG.append(e.getMessage());
-			}
-		}
- %>
+  } catch (ClassNotFoundException e) {
+    ERMSG = new StringBuffer();
+    ERMSG.append(e.getMessage());
+  } catch (SQLException e) {
+    ERMSG = new StringBuffer();
+    ERMSG.append(e.getMessage());
+  } catch (Exception e) {
+    ERMSG = new StringBuffer();
+    ERMSG.append(e.getMessage());
+  } finally {
+    try {
+      if (rs != null) {
+        rs.close();
+      }
+      if (stmt != null) {
+        stmt.close();
+      }
+      if (con != null) {
+        con.close();
+      }
+    } catch (SQLException e) {
+      ERMSG = new StringBuffer();
+      ERMSG.append(e.getMessage());
+    }
+  }
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
