@@ -29,8 +29,8 @@ public class shift_leaving extends HttpServlet {
 
 		StringBuffer query = new StringBuffer();
 
-		String working_shift_id = req.getParameter("WORKING_SHIFT_ID");
-		System.out.print(working_shift_id);
+		String attendance_id = req.getParameter("ATTENDANCE_ID");
+		System.out.print(attendance_id);
 		
 		SimpleDateFormat date_time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String leaving_date_time = date_time.format(new Date());
@@ -52,15 +52,15 @@ public class shift_leaving extends HttpServlet {
 						sb.append("<div class='text-2xl text-center bg-primary py-5 font-bold text-white'>退勤登録</div>");
 						sb.append("<div class='px-5'>");
 							query = new StringBuffer();
-							query.append("UPDATE working_shift SET working_shift_leaving = '");
+							query.append("UPDATE attendance SET attendance_leaving = '");
 							query.append(leaving_date_time);
-							query.append("' WHERE working_shift_id = '");
-							query.append(working_shift_id);
+							query.append("' WHERE attendance_id = '");
+							query.append(attendance_id);
 							query.append("'");
 							stmt.executeUpdate(query.toString());
 							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>退勤登録完了</div>");
 							sb.append("<div class='flex justify-center pt-5'>");
-								sb.append("<a href='/SD/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
+								sb.append("<a href='/SD/pages/shift_leaving.jsp' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
 						sb.append("</div>");
 					sb.append("</div>");

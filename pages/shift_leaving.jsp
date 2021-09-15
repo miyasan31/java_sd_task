@@ -33,16 +33,16 @@
 
  		SQL = new StringBuffer();
 
- 		SQL.append("SELECT working_shift_id, employee_name ");
- 		SQL.append("FROM working_shift, employee ");
- 		SQL.append("WHERE working_shift.employee_id = employee.employee_id ");
- 		SQL.append("AND working_shift_leaving IS NULL");
+ 		SQL.append("SELECT attendance_id, employee_name ");
+ 		SQL.append("FROM attendance, employee ");
+ 		SQL.append("WHERE attendance.employee_id = employee.employee_id ");
+ 		SQL.append("AND attendance_leaving IS NULL");
 
  		rs = stmt.executeQuery(SQL.toString());
 
  		while (rs.next()){
  						map = new HashMap<String,String>();
-						map.put("working_shift_id",rs.getString("working_shift_id"));
+						map.put("attendance_id",rs.getString("attendance_id"));
 						map.put("employee_name",rs.getString("employee_name"));
  						list.add(map);
  				}
@@ -97,7 +97,7 @@
 		rel="stylesheet"
 		type="text/css"
 	/>
-	<title>出勤登録</title>
+	<title>退勤登録</title>
  </head>
  <body>
 	<form action="/SD/servlet/shift_leaving" method="POST">
@@ -129,7 +129,25 @@
               退勤登録
             </a>
             <a
-              href="/SD/pages/employee_insert.html"
+              href="/SD/pages/shift_list.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト一覧
+            </a>
+            <a
+              href="/SD/pages/shift_regist.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト登録
+            </a>
+						<a
+							href="/SD/pages/employee_list.jsp"
+							class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+						>
+							従業員一覧
+						</a>
+            <a
+              href="/SD/pages/employee_regist.html"
               class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
             >
               従業員登録
@@ -144,7 +162,7 @@
         </nav>
 
         <main class="w-4/5 flex flex-col justify-center items-center">
-					<div class="flex flex-col gap-4 w-96">
+					<div class="flex flex-col gap-2 w-96">
 						<h1
 							class="
 								text-center
@@ -158,10 +176,15 @@
 							退勤登録
 						</h1>
 
-						<select name="WORKING_SHIFT_ID" class="select select-bordered select-info w-full">
+						<label
+							for="shift_join_year"
+							class="pl-1 text-gray-600"
+							>従業員氏名</label
+						>
+						<select name="ATTENDANCE_ID" class="select select-bordered select-info w-full">
 								<option selected disabled>選択してください</option>
 								<% for (int i = 0; i < list.size(); i++) { %>
-										<option value="<%= list.get(i).get("working_shift_id") %>">
+										<option value="<%= list.get(i).get("attendance_id") %>">
 											<%= list.get(i).get("employee_name") %>
 										</option>
 								<% } %>

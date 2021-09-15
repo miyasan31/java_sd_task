@@ -19,7 +19,7 @@
       rel="stylesheet"
       type="text/css"
     />
-    <title>Document</title>
+    <title>ホーム</title>
   </head>
   <body>
     <div class="flex flex-col w-full h-screen">
@@ -50,7 +50,25 @@
               退勤登録
             </a>
             <a
-              href="/SD/pages/employee_insert.html"
+              href="/SD/pages/shift_list.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト一覧
+            </a>
+            <a
+              href="/SD/pages/shift_regist.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト登録
+            </a>
+            <a
+              href="/SD/pages/employee_list.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              従業員一覧
+            </a>
+            <a
+              href="/SD/pages/employee_regist.html"
               class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
             >
               従業員登録

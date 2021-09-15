@@ -25,8 +25,6 @@ public class shift_join extends HttpServlet {
 		res.setContentType("text/html;charset=UTF-8");
 		out = res.getWriter();
 
-    
-
 		StringBuffer query = new StringBuffer();
 
 		String employee_id = req.getParameter("EMPLOYEE_ID");
@@ -52,8 +50,8 @@ public class shift_join extends HttpServlet {
 						sb.append("<div class='px-5'>");
 
 							query = new StringBuffer();
-							query.append("INSERT INTO working_shift ");
-							query.append("(employee_id, working_shift_join) ");
+							query.append("INSERT INTO attendance ");
+							query.append("(employee_id, attendance_join) ");
 							query.append("VALUES('");
 							query.append(employee_id);
 							query.append("','");
@@ -64,7 +62,7 @@ public class shift_join extends HttpServlet {
 							sb.append("<div class='text-secondary text-lg text-center py-3 bg-white'>出勤登録完了</div>");
 
 							sb.append("<div class='flex justify-center pt-5'>");
-								sb.append("<a href='/SD/pages/index.html' class='btn btn-link'>ホームに戻る</a>");
+								sb.append("<a href='/SD/pages/shift_join.jsp' class='btn btn-link'>ホームに戻る</a>");
 							sb.append("</div>");
 						sb.append("</div>");
 					sb.append("</div>");

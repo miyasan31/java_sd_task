@@ -125,7 +125,25 @@
               退勤登録
             </a>
             <a
-              href="/SD/pages/employee_insert.html"
+              href="/SD/pages/shift_list.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト一覧
+            </a>
+            <a
+              href="/SD/pages/shift_regist.jsp"
+              class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+            >
+              シフト登録
+            </a>
+						<a
+							href="/SD/pages/employee_list.jsp"
+							class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
+						>
+							従業員一覧
+						</a>
+            <a
+              href="/SD/pages/employee_regist.html"
               class="py-2 px-6 hover:bg-blue-100 font-bold rounded-full"
             >
               従業員登録
@@ -140,7 +158,7 @@
         </nav>
 
         <main class="w-4/5 flex flex-col justify-center items-center">
-					<div class="flex flex-col gap-4 w-96">
+					<div class="flex flex-col gap-2 w-96">
 						<h1
 							class="
 								text-center
@@ -154,6 +172,11 @@
 							出勤登録
 						</h1>
 
+						<label
+							for="shift_join_year"
+							class="pl-1 text-gray-600"
+							>従業員氏名</label
+						>
 						<select name="EMPLOYEE_ID" class="select select-bordered select-info w-full">
 								<option selected disabled>選択してください</option>
 								<% for (int i = 0; i < list.size(); i++) { %>
