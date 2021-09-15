@@ -172,8 +172,6 @@ public final class signout_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                サインアウト\r\n");
       out.write("              </h1>\r\n");
       out.write("\r\n");
-      out.write("              <p class=\"pt-4 text-center text-2xl text-red-400\">サインアウトしますか？</p>\r\n");
-      out.write("\r\n");
       out.write("              <button class=\"\r\n");
       out.write("                  w-56\r\n");
       out.write("                  mx-auto\r\n");

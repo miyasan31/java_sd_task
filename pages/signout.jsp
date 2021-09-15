@@ -114,8 +114,6 @@
                 サインアウト
               </h1>
 
-              <p class="pt-4 text-center text-2xl text-red-400">サインアウトしますか？</p>
-
               <button class="
                   w-56
                   mx-auto
