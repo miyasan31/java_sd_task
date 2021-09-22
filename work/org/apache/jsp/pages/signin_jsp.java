@@ -76,7 +76,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("      rel=\"stylesheet\"\r\n");
       out.write("      type=\"text/css\"\r\n");
       out.write("    />\r\n");
-      out.write("    <title>Document</title>\r\n");
+      out.write("    <title>サインイン</title>\r\n");
       out.write("  </head>\r\n");
       out.write("\r\n");
       out.write("  <body>\r\n");

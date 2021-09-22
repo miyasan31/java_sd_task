@@ -66,9 +66,6 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
   String employee_type = (String)session.getAttribute("employee_type");
   String employee_name = (String)session.getAttribute("employee_name");
   
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
-  
 
       out.write('\r');
       out.write('\n');
@@ -245,19 +242,6 @@ public final class shift_005fregist_jsp extends org.apache.jasper.runtime.HttpJs
       out.write("\t\t\t\t\t\t\t\t\t>分</label\r\n");
       out.write("\t\t\t\t\t\t\t\t>\r\n");
       out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<label\r\n");
-      out.write("\t\t\t\t\t\t\t\tfor=\"shift_leaving_ymd\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"pl-1 text-gray-600\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t>退勤予定日</label\r\n");
-      out.write("\t\t\t\t\t\t\t>\r\n");
-      out.write("\t\t\t\t\t\t\t<input\r\n");
-      out.write("\t\t\t\t\t\t\t\tid=\"shift_leaving_ymd\"\r\n");
-      out.write("\t\t\t\t\t\t\t\ttype=\"date\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tname=\"SHIFT_LEAVING_YMD\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tvalue=\"\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tclass=\"input input-info input-bordered w-full\"\r\n");
-      out.write("\t\t\t\t\t\t\t/>\r\n");
       out.write("\r\n");
       out.write("\t\t\t\t\t\t\t<label\r\n");
       out.write("\t\t\t\t\t\t\t\tfor=\"shift_leaving_hour\"\r\n");

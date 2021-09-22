@@ -65,9 +65,6 @@ public final class shift_005fleaving_jsp extends org.apache.jasper.runtime.HttpJ
   if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
   String employee_type = (String)session.getAttribute("employee_type");
   String employee_name = (String)session.getAttribute("employee_name");
-  
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 
  	String USER = "miyasan";
  	String PASSWORD = "0301";

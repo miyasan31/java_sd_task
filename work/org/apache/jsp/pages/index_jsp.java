@@ -57,12 +57,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
   response.setCharacterEncoding("UTF-8");
 	
   String employee_id = (String)session.getAttribute("employee_id");
-  if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
-  String employee_type = (String)session.getAttribute("employee_type");
+  if (employee_id.equals("")) {
+   response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
+  }
   String employee_name = (String)session.getAttribute("employee_name");
-  
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
+  String employee_type = (String)session.getAttribute("employee_type");
 
 
       out.write("\r\n");

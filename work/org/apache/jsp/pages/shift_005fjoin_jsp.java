@@ -71,9 +71,6 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
   if (employee_id.equals("")) response.sendRedirect("http://localhost:8080/SD/pages/signin.html");
   String employee_type = (String)session.getAttribute("employee_type");
   String employee_name = (String)session.getAttribute("employee_name");
-  
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
 
 	String USER = "miyasan";
 	String PASSWORD = "0301";
@@ -102,7 +99,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
 		SQL = new StringBuffer();
 
 		SQL.append("SELECT employee_name ");
-		SQL.append("FROM work_shift, employee ");
+		SQL.append("FROM work_shift, employee, attendance ");
 		SQL.append("WHERE employee.employee_id = work_shift.employee_id = attendance.employee_id ");
 		SQL.append("AND work_shift.employee_id = '");
 		SQL.append(employee_id);
@@ -110,7 +107,7 @@ public final class shift_005fjoin_jsp extends org.apache.jasper.runtime.HttpJspB
 		SQL.append("AND shift_join_schedule LIKE '");
 		SQL.append(today_ymd);
 		SQL.append("%' ");
-		SQL.append("AND attendance.employee_id = '");
+		SQL.append("AND work_shift.employee_id = '");
 		SQL.append(employee_id);
 		SQL.append("' ");
 		SQL.append("AND attendance_leaving IS NOT NULL ");

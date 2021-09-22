@@ -11,9 +11,6 @@
   String employee_type = (String)session.getAttribute("employee_type");
   String employee_name = (String)session.getAttribute("employee_name");
   
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
-  
  	String USER = "miyasan";
  	String PASSWORD = "0301";
  	String URL = "jdbc:mysql://localhost/sd_kadai";

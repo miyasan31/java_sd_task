@@ -11,9 +11,6 @@
   String employee_type = (String)session.getAttribute("employee_type");
   String employee_name = (String)session.getAttribute("employee_name");
   
-  ServletContext sc = getServletContext();
-  if (employee_type.equals("3")) sc.getRequestDispatcher("/pages/index.jsp").forward(request, response);
-  
 %>
 <%-- <%
 
@@ -242,19 +239,6 @@
 									>分</label
 								>
 							</div>
-
-							<label
-								for="shift_leaving_ymd"
-								class="pl-1 text-gray-600"
-								>退勤予定日</label
-							>
-							<input
-								id="shift_leaving_ymd"
-								type="date"
-								name="SHIFT_LEAVING_YMD"
-								value=""
-								class="input input-info input-bordered w-full"
-							/>
 
 							<label
 								for="shift_leaving_hour"

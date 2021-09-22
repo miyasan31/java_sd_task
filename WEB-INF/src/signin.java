@@ -48,9 +48,10 @@ public class signin extends HttpServlet {
 			
       ServletContext sc = getServletContext();
 
-			HttpSession session = req.getSession(false);
+			HttpSession session = req.getSession();
 			
 			if (rs.next()) {
+				System.out.println(rs.getString("employee_id"));
 				session.setAttribute("employee_id", rs.getString("employee_id"));
 				session.setAttribute("employee_name", rs.getString("employee_name"));
 				session.setAttribute("employee_type", rs.getString("employee_type"));

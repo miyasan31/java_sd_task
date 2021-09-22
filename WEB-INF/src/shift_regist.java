@@ -25,12 +25,11 @@ public class shift_regist extends HttpServlet {
 		String shift_join_ymd = req.getParameter("SHIFT_JOIN_YMD");
 		String shift_join_hour = req.getParameter("SHIFT_JOIN_HOUR");
 		String shift_join_minute = req.getParameter("SHIFT_JOIN_MINUTE");
-		String shift_leaving_ymd = req.getParameter("SHIFT_LEAVING_YMD");
 		String shift_leaving_hour = req.getParameter("SHIFT_LEAVING_HOUR");
 		String shift_leaving_minute = req.getParameter("SHIFT_LEAVING_MINUTE");
 
     String shift_join_schedule = shift_join_ymd + " " + shift_join_hour + ":" + shift_join_minute;
-    String shift_leaving_schedule = shift_leaving_ymd + " " + shift_leaving_hour + ":" + shift_leaving_minute;
+    String shift_leaving_schedule = shift_join_ymd + " " + shift_leaving_hour + ":" + shift_leaving_minute;
 		
 		try {
 			Class.forName(DRIVER);
