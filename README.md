@@ -1,9 +1,5 @@
 # システム設計の課題
 
-## GitHub
-
-https://github.com/miyasan31/java_sd_task
-
 ## メンバー
 
 - 宮原将太
